@@ -5,6 +5,7 @@ gem 'devise'
 
 # Para el manejo de permisos de devise
 gem 'cancancan'
+gem 'rolify'
 
 # Para ver resultado de consultas en columnas
 gem 'hirb'

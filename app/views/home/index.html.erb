@@ -3,7 +3,8 @@
 <% if current_user %> 	
     <h3>Bienvenido <%= current_user.email %></h3><br>
     <% if @ability.can? :manage, :all %>
-        <%= link_to 'Lista de Usuarios', users_path %>        
+        <%= link_to 'Lista de Usuarios', users_path %> 
+        <%= link_to 'Agregar tipo de couch', "couch_type" %>        
     <% end %>
     <br>
     <%= link_to 'Lista de Couchs', couchs_path %>

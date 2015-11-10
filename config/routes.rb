@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'couchs/index'
+  get 'couch_type/index'
   get 'user/index'
   resources :couchs
+  resources :couch_type
   resources :users
   root 'home#index'
 

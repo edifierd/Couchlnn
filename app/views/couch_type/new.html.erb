@@ -1,0 +1,28 @@
+<% if @ablity.can? :manage, :all %>
+
+<div class="container">
+	<h1> CREA UN COUCH !!!!!!1111123 tipo de </h1>
+
+	<%= form_for @couch_type , url: {action:"create"} do |f| %>
+		<div class="row">
+			<div class="col-md-6">
+				<%= f.label :titulo %>
+  				<%= f.text_area :titulo, class: 'form-control', label: 'titulo', placeholder: 'Ingrese el titulo del couch' %>
+  			</div>
+  		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<%= f.label :descripcion %>
+  				<%= f.text_area :descripcion, class: 'form-control', label: 'descripcion', placeholder: 'Ingrese la descripcion' %>
+  			</div>
+  		</div>
+
+  		<%= f.submit "Crear couch", class: 'btn btn-primary' %>
+  	</div>
+<% end %>
+</div>
+
+<% else %>
+	no tiene los permisos suficientes para admin
+<% end %>

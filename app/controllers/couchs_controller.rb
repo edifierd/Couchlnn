@@ -10,7 +10,21 @@ class CouchsController < ApplicationController
 
   def edit    
   end
-  
+
+  def new
+     @couch = Couch.new   
+
+  end
+
+  def create
+    @couch = Couch.new
+    @couch.titulo = params[:couch][:titulo]
+    @couch.descripcion = params[:couch][:descripcion]
+    @couch.user_id = current_user.id
+    @couch.save
+    redirect_to (@couch)
+  end
+
   def destroy
   	@couch = Couch.find(params[:id])
   	@couch.destroy

@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Manejo de usuarios
 gem 'devise'
@@ -15,6 +15,7 @@ gem 'rails', '4.2.4'
 
 # Use pg as the database for Active Record
 gem 'pg'
+gem 'tzinfo-data'
 gem 'rails_12factor'
 
 # Use SCSS for stylesheets

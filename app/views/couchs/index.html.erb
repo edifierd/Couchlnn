@@ -1,0 +1,25 @@
+<h1> Listado de Couchs </h1>
+
+<table class="table">
+
+	<tr>
+		<th> Título </th>
+		<th> Descripción </th>
+		<th> User id </th>
+	</tr>
+
+	<% couchs = Couch.all %>
+	<% couchs.each do |couch| %>
+		<tr>
+			<td> <%= link_to couch.titulo, couch %> </td>
+			<td> <%= couch.descripcion %> </td>
+			<td> <%= couch.user_id %> </td>
+			<td>
+				<%= link_to "Editar", edit_couch_path(couch), class: 'btn btn-info btn-sm' %>
+				<%= link_to "Eliminar", couch, method: :delete, class: 'btn btn-danger btn-sm' %>
+			</td>
+		</tr>
+	<% end %>
+
+
+</table>

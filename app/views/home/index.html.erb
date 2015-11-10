@@ -1,3 +1,8 @@
+<h1> Bienvenido a CouchInn!!!1 </h1>
+
+    <%= link_to 'Lista de Couchs', couchs_path %>
+    <%= link_to 'Lista de Usuarios', users_path %>
+
 <% if current_user %>
     <%= button_to 'Logout', destroy_user_session_path, method: :delete %>
   

@@ -1,13 +1,21 @@
 <h1> Couch</h1>
 
 <table class="table">
-
 	<tr>
-		<td> <%= @couch.titulo %> </td>  <td> <%= @couch.descripcion %> </td> 
-		<td> <%= @couch.couch_type_id %> </td>  <td> <%= @couch.init_date %> </td>
-		<td> <%= @couch.out_date %> </td> <td> <%= @couch.enable %> </td>
-		<td> <%= @couch.user_id %> </td>  <td> <%= @couch.url_foto %> </td>
-		<td> <%= @couch.created_at %> </td>  <td> <%= @couch.updated_at %> </td>
+		<td>Titulo</td>
+		<td>Descripcion</td>
+		<td>Tipo</td>
+		<td>Estado</td>
+		<td>Usuario</td>
+		<td>Foto</td>
+	</tr>
+	<tr>
+		<td> <%= @couch.titulo %> </td>  
+		<td> <%= @couch.descripcion %> </td> 
+		<td> <%= @couch.couch_type_id %> </td>  
+		<td> <%= (@couch.enable) ? "Disponible" : "Usurpado"  %> </td>
+		<td> <%= @couch.user_id %> </td>  
+		<td> <%= @couch.url_foto %> </td>
 	</tr>
 	
 

@@ -5,6 +5,9 @@ class Ability
 
     if user.has_role? :admin
         can :manage, :all
+    end
+    if user.has_role? :usuario
+        can :read, User, :active => true, :user_id => user.id
     else
         can :read, Couch, :active => true, :user_id => user.id
     end

@@ -1,6 +1,6 @@
 <h1>CouchInn!!! </h1>
 
-<% if current_user %>
+<% if current_user %> 	
     <h3>Bienvenido <%= current_user.email %></h3><br>
     <% if @ability.can? :manage, :all %>
         <%= link_to 'Lista de Usuarios', users_path %>        

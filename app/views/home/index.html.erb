@@ -1,9 +1,12 @@
-<h1> Bienvenido a CouchInn!!!1 </h1>
-
-    <%= link_to 'Lista de Couchs', couchs_path %>
-    <%= link_to 'Lista de Usuarios', users_path %>
+<h1>CouchInn!!! </h1>
 
 <% if current_user %>
+    <h3>Bienvenido <%= current_user.email %></h3><br>
+    <% if @ability.can? :manage, :all %>
+        <%= link_to 'Lista de Usuarios', users_path %>        
+    <% end %>
+    <br>
+    <%= link_to 'Lista de Couchs', couchs_path %>
     <%= button_to 'Logout', destroy_user_session_path, method: :delete %>
   
 <% else %>

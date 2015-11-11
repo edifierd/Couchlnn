@@ -1,34 +1,10 @@
-
+<h1> Usuario</h1>
 
 <table class="table">
-	<tr>
-		<td>Perfil de Usuario<td/>
-		<td> 
-			<%= link_to "Editar", edit_user_registration_path, class: 'btn btn-info btn-sm' %>	
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-		Correo:  <%= @user.email %> 
-		</td> 
-	</tr>
-	<tr>
-		<td colspan="2"> <h5>Mi lista de Couchs </h5> </td>
-	</tr>
-	<% if @user.couchs.count > 0 %>
-	<% @user.couchs.each do |couch| %>
-		<tr>
-			<td> Titulo: <%= couch.titulo %> </td>
-			<td> Descripcion: <%= couch.descripcion %> </td>
-		</tr>
-	<% end %>
-	<% else %>
-		<tr>
-			<td colspan="2">El usuario no tiene couchs</td>
-		</tr>
-	<% end %>
-	
 
+	<tr>
+		<td> <%= @user.email %> </td> 
+	</tr>
 	
 
 </table>

@@ -1,30 +1,19 @@
 class CouchTypeController < ApplicationController
+  load_and_authorize_resource
   def index
     @couch_types = CouchType.all
-    if current_user 
-      @ability = Ability.new(current_user)
-    end
   end
 
   def show
   	@couch_type = CouchType.find(params[:id])
-    if current_user 
-      @ability = Ability.new(current_user)
-    end
   end
 
   def new
     @couch_type = CouchType.new
-    if current_user 
-      @ability = Ability.new(current_user)
-    end
   end
 
   def edit  
     @couch_type = CouchType.find(params[:id])
-    if current_user 
-      @ability = Ability.new(current_user)
-    end
   end
 
   def update

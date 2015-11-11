@@ -1,4 +1,66 @@
-<h1>CouchInn!!! </h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Couchinn</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag :defaults %>
+</head>
+<body>
+
+<div class="row" >
+	<div class="col-md-4">
+		<h3>CouchInn!!!</h3> 
+	</div>
+	<div class="col-md-2"><br>
+		<% if current_user %> 
+			<%= button_to 'Logout', destroy_user_session_path, method: :delete %> 
+		<% else %>
+    		<%= link_to 'Login', new_user_session_path %>
+		<% end %>
+	</div>
+
+	<div class="col-md-2"><br>
+		<%= link_to 'Lista de Couchs', couchs_path %>
+	</div>
+
+	<div class="col-md-2"><br>
+		<% if current_user %> 
+		<% if can? :manage, :all %>
+			<%= link_to 'Lista de Usuarios', users_path %> 		
+		<% end %>
+		<% end %>
+	</div>
+
+	<div class="col-md-2"><br>
+		<% if current_user %> 
+		<% if can? :manage, :all %>
+			<%= link_to 'Agregar tipo de couch', "couch_type" %>  
+		<% end %>
+		<% end %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12"><br><br>
+		<p>
+Bienvenidos a CouchInn, este sitio presta el servicio para todos aquellos que quieran viajar puedan encontrar hospedaje en algún punto de nuestro país. Siendo un servicio totalmente gratuito que busca el intercambio cultural.</p>
+	</div>
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!-- <h1>CouchInn!!! </h1>
 
 <% if current_user %> 	
     <h3>Bienvenido <%= current_user.email %></h3><br>

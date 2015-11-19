@@ -1,61 +1,31 @@
-<div class="row" >
-  <div class="col-md-4">
-    <h3>CouchInn!!!</h3> 
-  </div>
-  <div class="col-md-2"><br>
-    <% if current_user %> 
-      <%= button_to 'Logout', destroy_user_session_path, method: :delete %> 
-    <% else %>
-        <%= link_to 'Login', new_user_session_path %>
-    <% end %>
-  </div>
+<%= render "home/menu" %>
 
-  <div class="col-md-2"><br>
-    <%= link_to 'Lista de Couchs', couchs_path %>
-  </div>
 
-  <div class="col-md-2"><br>
-    <% if current_user %> 
-    <% if can? :manage, :all %>
-      <%= link_to 'Lista de Usuarios', users_path %>    
-    <% end %>
-    <% end %>
-  </div>
-
-  <div class="col-md-2"><br>
-    <% if current_user %> 
-    <% if can? :manage, :all %>
-      <%= link_to 'Agregar tipo de couch', "couch_type" %>  
-    <% end %>
-    <% end %>
-  </div>
-</div><br><br>
-
-<h2>Sign up</h2>
+<h2>Registrarse</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :Correo %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :Contraseña %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> caracteres minimos)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :Confimación_contraseña %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Registrarse" %>
   </div>
 <% end %>
 

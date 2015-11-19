@@ -1,0 +1,36 @@
+<div class="row" >
+	<div class="col-md-2">
+		<h3>CouchInn!!!</h3> 
+	</div>
+	<div class="col-md-2"><br>
+		<% if current_user %> 
+			<%= button_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %> 
+		<% else %>
+    		<%= link_to 'Iniciar Sesión', new_user_session_path %>
+		<% end %>
+	</div>
+
+	<div class="col-md-2"><br>
+		<% if current_user and can? :read, User %>
+			<%= link_to current_user.email+' Perfil', current_user %>
+		<% end %>
+	</div>
+
+	<div class="col-md-2"><br>
+		<%= link_to 'Lista de Couchs', couchs_path %>
+	</div>
+
+	<div class="col-md-2"><br>
+		<% if current_user and can? :crud, User %>
+			<%= link_to 'Lista de Usuarios', users_path %> 		
+		<% end %>
+	</div>
+
+	<div class="col-md-2"><br>
+		<% if current_user and can? :crud, CouchType %>
+			<%= link_to 'Tipos de couch', "/couch_type" %>  
+		<% end %>
+	</div>
+</div>
+
+<br><br>

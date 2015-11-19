@@ -1,13 +1,33 @@
 class Ability
   include CanCan::Ability
 
+  
+
   def initialize(user)
-    if user.has_role? :admin
-        can :manage, :all
-    end
+    #Todos los permisos CRUD
+    alias_action :create, :read, :update, :destroy, :to => :crud 
+    alias_action :create, :read, :to => :cr
+    alias_action :update, :destroy, :to => :ud
+    #Cuando el Usuario No esta registrado
+    user ||= User.new  
+
     if user.has_role? :usuario
         can :read, :all
+        cannot :crud , CouchType
+        can :crud , User , :id => user.id
+        can :cr , Couch
+        can :ud , Couch , :user_id => user.id
     end
+    if user.has_role? :admin
+        #can :manage, :all
+        can :crud, User
+        can :crud, CouchType
+        can :crud, Couch
+    end
+
+    #alias_action :create, :read, :update, :destroy, :to => :crud
+    #can :crud, User
+
     #else
     #    can :read, Couch, :active => true, :user_id => user.id
     #end

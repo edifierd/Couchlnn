@@ -1,5 +1,5 @@
 class CouchsController < ApplicationController
-  
+  load_and_authorize_resource :only => [:index, :show, :edit, :new]
   def index
     @couch = Couch.all
   end
@@ -13,7 +13,6 @@ class CouchsController < ApplicationController
 
   def new
      @couch = Couch.new   
-
   end
 
   def create
@@ -22,7 +21,7 @@ class CouchsController < ApplicationController
     @couch.descripcion = params[:couch][:descripcion]
     @couch.user_id = current_user.id
     @couch.save
-    redirect_to (@couch)
+    redirect_to couchs_path
   end
 
   def destroy

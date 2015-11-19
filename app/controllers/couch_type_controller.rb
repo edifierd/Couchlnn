@@ -1,5 +1,5 @@
 class CouchTypeController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :only => [:index, :show, :edit, :new]
   def index
     @couch_types = CouchType.all
   end

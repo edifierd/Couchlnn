@@ -1,35 +1,4 @@
-<div class="row" >
-	<div class="col-md-4">
-		<h3>CouchInn!!!</h3> 
-	</div>
-	<div class="col-md-2"><br>
-		<% if current_user %> 
-			<%= button_to 'Logout', destroy_user_session_path, method: :delete %> 
-		<% else %>
-    		<%= link_to 'Login', new_user_session_path %>
-		<% end %>
-	</div>
-
-	<div class="col-md-2"><br>
-		<%= link_to 'Lista de Couchs', couchs_path %>
-	</div>
-
-	<div class="col-md-2"><br>
-		<% if current_user %> 
-		<% if can? :manage, :all %>
-			<%= link_to 'Lista de Usuarios', users_path %> 		
-		<% end %>
-		<% end %>
-	</div>
-
-	<div class="col-md-2"><br>
-		<% if current_user %> 
-		<% if can? :manage, :all %>
-			<%= link_to 'Agregar tipo de couch', "couch_type" %>  
-		<% end %>
-		<% end %>
-	</div>
-</div><br><br>
+<%= render "home/menu" %>
 
 <div class="container">
 	<h1> Crear un couch </h1>

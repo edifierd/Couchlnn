@@ -12,7 +12,7 @@
 
 	<div class="col-md-2"><br>
 		<% if current_user and can? :read, User %>
-			<%= link_to current_user.email+' Perfil', current_user %>
+		<%= link_to current_user.first_name+" Perfil", current_user %>
 		<% end %>
 	</div>
 

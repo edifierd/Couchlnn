@@ -78,15 +78,33 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-  config.action_mailer.default_url_options =   { :host => 'your_app.herokuapp.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      address: "smtp.gmail.com",
-      port: 587,
-      authentication: "plain",
-      enable_starttls_auto: true,
-      user_name: "couchinn@gmail.com",
-      password: "6couchinn6" 
+  #config.action_mailer.default_url_options =   { :host => 'localhost:3000' }
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  #    address: "smtp.gmail.com",
+  #    port: 587,
+  #    authentication: "plain",
+  #    enable_starttls_auto: true,
+  #    user_name: "couchinn6@gmail.com",
+  #    password: "6couchinn6" 
 
-  }
+  #}
+
+  config.action_mailer.default_url_options = { :host => 'example.com' }
+# ActionMailer Config
+# Setup for production - deliveries, no errors raised
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.perform_deliveries = true
+config.action_mailer.raise_delivery_errors = false
+config.action_mailer.default :charset => "utf-8"
+
+config.action_mailer.smtp_settings = {
+  address: "smtp.gmail.com",
+  port: 587,
+  domain: "gmail.com",
+  authentication: "plain",
+  enable_starttls_auto: true,
+  user_name: "couchinn6@gamil.com",
+  password: "6couchinn6"
+}
 end

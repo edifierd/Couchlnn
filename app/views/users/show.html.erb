@@ -1,37 +1,164 @@
 <%= render "home/menu" %>
 
 
-<table class="table">
-	<tr>
-		<td>Perfil de Usuario<td/>
-		<td> 
+<style type="text/css">
+  p{ 
+	font-size: 17px;
+	margin-left: 15px;
+  }	
+</style>
+	
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;"
+>     
+	<div class="row">
+		<div class="col-md-10"><h2>Mis Datos</h2></div>
+		<div class="col-md-2" style="margin-top: 20px">
 		<% if current_user and can? :update, @user %>
-			<%= link_to "Editar", edit_user_registration_path, class: 'btn btn-info btn-sm' %>
-		<% end %>	
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-		Correo:  <%= @user.email %> 
-		</td> 
-	</tr>
-	<tr>
-		<td colspan="2"> <h5>Mi lista de Couchs </h5> </td>
-	</tr>
-	<% if @user.couchs.count > 0 %>
-	<% @user.couchs.each do |couch| %>
-		<tr>
-			<td> Titulo: <%= couch.titulo %> </td>
-			<td> Descripcion: <%= couch.descripcion %> </td>
-		</tr>
-	<% end %>
-	<% else %>
-		<tr>
-			<td colspan="2">El usuario no tiene couchs</td>
-		</tr>
-	<% end %>
-	
+			<%= link_to 'Modificar Datos', edit_user_registration_path, class: 'btn btn-danger' %>
+		<% end %>
+		</div>
+	</div>
 
-	
+	<div class="row" style="background-color:#F2F2F2">
+	  	<div class="row">
+	  		<div class="col-md-2" style="margin-top: 35px;">
+	  		<%= image_tag "rails.png", :alt => "Avatar",  size: "120x120" %>
+	  		</div>
+	  		<div class="col-md-10">
+	  		<div class="row">
+	  		<div class="col-md-12" style="margin-top: 20px">
+	  			<p><i>Nombre y Apellido:  </i><b><%= @user.first_name+" "+@user.last_name%></b></p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Tipo de cuenta:</i>
+	  		  <% if @user.has_role? :admin %>
+	  		  	Administrador
+	  		  <% end %>
+	  		  <% if @user.has_role? :premium %> 
+	  		  	Premium 
+	  		  <% else %> 
+	  		  	Estandar 
+	  		  <% end %>
+	  		</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+			<div class="col-md-12"><p><i>Correo:</i>  <%= @user.email %></p></div>
+	 	</div>
+	  	<div class="row">
+	  		<div class="col-md-12"><p><i>Edad:</i> <%= @user.age %> </p></div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Genero:</i> <%= @user.genre %></p>
+	  		</div>
+	  	</div>
+	</div>
+	</div>
+	</div>
+</div>
 
-</table>
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px"
+>     
+	<div class="row">
+		<div class="col-md-10"><h2>Mis Couchs</h2></div>
+		<div class="col-md-2" style="margin-top: 20px">
+		<% if current_user and can? :update, @user %>
+			<%= link_to "Agregar Couch", new_couch_path() , 
+			class: 'btn btn-danger',  action: "new"
+			%>
+		<% end %>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			<table class="table">
+				<tr>
+					<td>Foto</td>
+					<td>Título</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Fecha Entrada</td>
+					<td>Fecha Salida</td>
+					<td>Estado</td>
+					<td>Editar</td>
+					<td>Borrar</td>
+				</tr>
+				<% @user.couchs.each do |couch| %>
+				<tr>
+					<td><%= couch.url_foto%></td>
+					<td><%= couch.titulo%></td>
+					<td><%= couch.descripcion%></td>
+					<td><%= couch.couch_type_id%></td>
+					<td><%= couch.init_date%></td>
+					<td><%= couch.out_date%></td>
+					<td>
+					<% if couch.enable %>Disponible
+					<% else %>No Disponible<%end%>
+					</td>
+					<% if current_user and can? :update, couch and can? :destroy, couch %>
+						<td>
+						<%= link_to "Editar", edit_couch_path(couch), class: 'btn btn-info btn-sm' %>
+						</td>
+						<td>
+						<%= link_to "Eliminar", couch, method: :delete, class: 'btn btn-danger btn-sm' %>
+						</td>
+					<% else %>
+						<td></td><td></td>
+					<% end %>
+				</tr>
+			    <% end %>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:40px;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Mis Couchs Reservados</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			<table class="table">
+				<tr>
+					<td>Foto</td>
+					<td>Título</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Fecha Entrada</td>
+					<td>Fecha Salida</td>
+					<td>Estado</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+

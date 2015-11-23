@@ -11,7 +11,7 @@ class Ability
     #Cuando el Usuario No esta registrado
     user ||= User.new  
 
-    if user.has_role? :usuario
+    if (user.has_role? :usuario) or (user.has_role? :premium)
         can :read, :all
         cannot :crud , CouchType
         can :crud , User , :id => user.id
@@ -23,7 +23,10 @@ class Ability
         can :crud, User
         can :crud, CouchType
         can :crud, Couch
+    else 
+        can :read, Couch
     end
+
 
     #alias_action :create, :read, :update, :destroy, :to => :crud
     #can :crud, User

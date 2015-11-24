@@ -1,8 +1,22 @@
 <%= render "home/menu" %>
 
-<%= form_tag '/ser_premium/new' do %>
+<%= form_tag '/ser_premium/new', onsubmit: "
+					var num = document.getElementById('num');
+					var num_length = num.value.length;
+					var nombre = document.getElementById('nombre');
+					var nombre_length = nombre.value.length;
+					var estado = true;
+					if (nombre_length < 4){
+						alert ('Nombre incorrecto');
+					  	estado = false;
+					}
+					if ((num_length != 16) || (isNaN(num.value))){
+						alert ('Numero de tarjeta invalido');
+					  	estado = false;
+                    } 
+                    return estado " do %>
 	
-	<table class="table">
+	<table class="table"> 
 		<tr>
 			<td><%= label_tag :pais, 'País: ' %></td>
 			<td><%= select_tag "Pais", "
@@ -30,7 +44,7 @@
 				<%= label_tag :secret, "Código de seguridad" %>
 			</td>
 			<td>
-				<%= password_field_tag 'secret' %>
+				<%= password_field_tag :secret %>
 			</td>
 		</tr>
 		<tr>
@@ -38,7 +52,7 @@
 				<%= label_tag :num, "Nº de Tarjeta: " %>
 			</td>
 			<td>
-				<%= text_field_tag 'num' %>
+				<%= text_field_tag :num %>
 			</td>
 		</tr>
 		<tr>

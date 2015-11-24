@@ -26,6 +26,11 @@
     <tr>
       <td><%= f.label :genre, "Genero" %></td>
       <td><%= f.select :genre, ['Masculino', 'Femenino'] %></td>
+    </tr> 
+
+    <tr>
+      <td><%= f.label :age, "Edad" %></td>
+      <td><%= f.number_field :age, value: 13 %></td>
     </tr>   
 
     <tr>

@@ -5,10 +5,16 @@ Rails.application.routes.draw do
   get 'couchs/index'
   get 'couch_type/index'
   get 'user/index'
+  get 'ser_premium/index'
+  post 'ser_premium/new'
+  get 'password_reset/index'
+  post 'password_reset/new'
   resources :couchs
   resources :couch_type
   resources :users
   root 'home#index'
+
+  
 
 
 

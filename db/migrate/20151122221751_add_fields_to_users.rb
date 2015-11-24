@@ -5,5 +5,7 @@ class AddFieldsToUsers < ActiveRecord::Migration
     add_column :users, :genre, :string
     add_column :users, :age, :integer
     add_column :users, :avatar_img, :string
+    add_column :users, :secret_question, :string
+    remove_column :users, :premium
   end
 end

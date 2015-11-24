@@ -1,9 +1,6 @@
 class HomeController < ApplicationController
 
   def index
-  	#if current_user
-  	#	@ability = Ability.new(current_user)
-  	#end
   end
 
   #def show

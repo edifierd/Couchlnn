@@ -52,6 +52,15 @@
     </tr> 
 
     <tr>
+      <td colspan="2">
+      <%= f.label :secret_question, "Pregunta secreta: ¿Cuál es tu color favorito?" %>
+      <%= f.text_field :secret_question, autofocus: true %> 
+      <br>
+      <em>(Sera necesaria en caso que olvide su contraseña)</em>
+      </td>
+    </tr>  
+
+    <tr>
       <td colspan="2" align="center">
         <br>
         <%= f.submit "Registrarse" %>

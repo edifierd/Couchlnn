@@ -13,4 +13,6 @@ class User < ActiveRecord::Base
   def assign_default_role
     add_role(:usuario) if self.roles.blank?
   end
+
+  scope :by_email, -> email { where(email: email) }
 end

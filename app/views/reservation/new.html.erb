@@ -1,0 +1,21 @@
+<%= render "home/menu" %>
+
+<div class="container">
+	<h1> Reservar un Couch </h1>
+
+	<%= form_for @reservation , url: {action:"create"} do |f| %>
+		<div class="row">
+			
+			<div class="col-md-6">
+				<%= f.label "Fecha de inicio" %>
+  				<%= f.date_select :start_date, :order => [:day, :month, :year] %>
+  			</div>
+  			<div class="col-md-6">
+				<%= f.label "Fecha de Fin" %>
+  				<%= f.date_select :end_date, :order => [:day, :month, :year] %>
+  			</div>
+  		</div>
+  		<%= f.submit "Reservar couch", class: 'btn btn-primary' %>
+  	</div>
+<% end %>
+</div>

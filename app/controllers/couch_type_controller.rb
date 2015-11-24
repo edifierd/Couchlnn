@@ -17,7 +17,7 @@ class CouchTypeController < ApplicationController
   end
 
   def update
-    @couch_type = CouchType.find(params[:couch_type][:id])
+    @couch_type = CouchType.find(params[:id])
     @couch_type.titulo = params[:couch_type][:titulo]
     @couch_type.descripcion = params[:couch_type][:descripcion]
     @couch_type.enabled = params[:couch_type][:enabled]

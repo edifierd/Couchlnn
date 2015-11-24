@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   get 'couchs/index'
   get 'couch_type/index'
   get 'user/index'
+  get 'reservation/new'
   resources :couchs
   resources :couch_type
   resources :users
+  resources :reservation
   root 'home#index'
 
 

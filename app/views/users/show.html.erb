@@ -104,10 +104,10 @@
 				</tr>
 				<% @user.couchs.each do |couch| %>
 				<tr>
-					<td><%= couch.url_foto%></td>
+					<td><%= image_tag couch.url_foto, :alt => "FOTITO rota",  size: "120x120" %></td>
 					<td><%= couch.titulo%></td>
 					<td><%= couch.descripcion%></td>
-					<td><%= couch.couch_type_id%></td>
+					<td><%= CouchType.find(couch.couch_type_id).titulo %></td>
 					<td><%= couch.init_date%></td>
 					<td><%= couch.out_date%></td>
 					<td>

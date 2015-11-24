@@ -6,12 +6,7 @@
 	<h1> EDITA UN COUCH !!!!!!</h1>
 
 	<%= form_for @couch_type , url: {action:"update"} do |f| %>
-		<div class="row">
-			<div class="col-md-6">
-				<%= f.label :id %>
-  				<%= f.text_area :id, class: 'form-control', label: 'id', placeholder: 'id' %>
-  			</div>
-  		</div>
+		
 		<div class="row">
 			<div class="col-md-6">
 				<%= f.label :titulo %>

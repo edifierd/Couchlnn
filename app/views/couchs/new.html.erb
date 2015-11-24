@@ -18,6 +18,20 @@
   			</div>
   		</div>
 
+  		<div class="row">
+			<div class="col-md-6">
+				<%= f.label "Tipo de Couch" %>
+  				<%= collection_select :couch, :couch_type_id, CouchType.all, :id, :titulo %>
+  			</div>
+  		</div>
+
+  		<div class="row">
+			<div class="col-md-6">
+				<%= f.label "Imagen" %>
+  				<%= f.file_field :url_foto %>
+  			</div>
+  		</div>
+
   		<%= f.submit "Crear couch", class: 'btn btn-primary' %>
   	</div>
 <% end %>

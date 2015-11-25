@@ -7,14 +7,68 @@
 		<div class="row">
 			<div class="col-md-6">
 				<%= f.label :titulo %>
-  				<%= f.text_area :titulo, class: 'form-control', label: 'titulo', placeholder: 'Ingrese el titulo' %>
+  				<%= f.text_area :titulo, class: 'form-control', label: 'titulo', placeholder: 'Ingrese el titulo' , :required => true%>
   			</div>
   		</div>
 
 		<div class="row">
 			<div class="col-md-6">
 				<%= f.label :descripcion %>
-  				<%= f.text_area :descripcion, class: 'form-control', label: 'descripcion', placeholder: 'Ingrese la descripcion' %>
+  				<%= f.text_area :descripcion, class: 'form-control', label: 'descripcion', placeholder: 'Ingrese la descripcion' , :required => true%>
+  			</div>
+  		</div>
+
+  		<div class="row">
+			<div class="col-md-6">
+				<%= f.label "Tipo de Couch" %>
+  				<%= collection_select :couch, :couch_type_id, CouchType.all, :id, :titulo %>
+  			</div>
+  		</div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.label "Ubicación del Couch" %>
+        <!-- Script by todorotosoft.com -->
+          <select name=ubicacion>
+            <option value="Buenos Aires">Buenos Aires</option>
+            <option value="Buenos Aires Capital">Buenos Aires Capital</option>
+            <option value="Catamarca">Catamarca</option>
+            <option value="Chaco">Chaco</option>
+            <option value="Chubut">Chubut</option>      
+            <option value="Uruguay">Uruguay</option>      
+            <option value="Cordoba">Cordoba</option>
+            <option value="Corrientes">Corrientes</option>
+            <option value="Entre Rios">Entre Rios</option>
+            <option value="Formosa">Formosa</option>
+            <option value="Jujuy">Jujuy</option>
+            <option value="La Pampa">La Pampa</option>
+            <option value="La Rioja">La Rioja</option>
+            <option value="Mendoza">Mendoza</option>
+            <option value="Misiones">Misiones</option>
+            <option value="Neuquen">Neuquen</option>
+            <option value="Rio Negro">Rio Negro</option>
+            <option value="Salta">Salta</option>
+            <option value="San Juan">San Juan</option>
+            <option value="San Luis">San Luis</option>
+            <option value="Santa Cruz">Santa Cruz</option>
+            <option value="Santa Fe">Santa Fe</option>
+            <option value="Santiago del Estero">Santiago del Estero</option>
+            <option value="Tierra del Fuego">Tierra del Fuego</option>
+            <option value="Tucuman">Tucuman</option>
+          </select>
+        <!-- Script by todorotosoft.com -->
+        </div>
+      </div>
+      <div class="row">
+      <div class="col-md-6">
+        <%= f.label "Capacidad" %>
+          <input id="capacity" max="20.0" min="1.0" name="capacity" step="1" type="number" value=1  />
+        </div>
+      </div>
+  		<div class="row">
+			<div class="col-md-6">
+				<%= f.label "Imagen" %>
+  				<%= f.file_field :url_foto %>
   			</div>
   		</div>
 

@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   end
 
   scope :by_email, -> email { where(email: email) }
-
+  validates_presence_of :first_name, :last_name, :secret_question, :age
   validates_inclusion_of :age, in: 13..99
 
 end

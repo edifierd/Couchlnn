@@ -17,7 +17,7 @@ class CouchTypeController < ApplicationController
   end
 
   def update
-    @couch_type = CouchType.find(params[:couch_type][:id])
+    @couch_type = CouchType.find(params[:id])
     @couch_type.titulo = params[:couch_type][:titulo]
     @couch_type.descripcion = params[:couch_type][:descripcion]
     @couch_type.enabled = params[:couch_type][:enabled]
@@ -26,12 +26,17 @@ class CouchTypeController < ApplicationController
   end
     
   def create
+
     @couch_type = CouchType.new
     @couch_type.titulo = params[:couch_type][:titulo]
     @couch_type.descripcion = params[:couch_type][:descripcion]
     @couch_type.enabled = true
-    @couch_type.save
-    redirect_to (@couch_type)
+    if (CouchType.where("titulo = '"+@couch_type.titulo+"'").count > 0)
+      redirect_to "/couch_type/new"
+    else 
+      @couch_type.save
+      redirect_to (@couch_type)
+    end
   end
 
   def destroy

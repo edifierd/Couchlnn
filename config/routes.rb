@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   post 'ser_premium/new'
   get 'password_reset/index'
   post 'password_reset/new'
+  get 'reservation/new'
+  get 'reservation/index'
   resources :couchs
   resources :couch_type
   resources :users
+  resources :reservation
   root 'home#index'
 
   

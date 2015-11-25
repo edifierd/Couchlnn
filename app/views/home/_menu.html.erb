@@ -1,36 +1,50 @@
+
+<%= image_tag "titulo.jpg" , style:"width: 100%" %>
+
 <div class="row" >
-	<div class="col-md-2">
-		<h3>CouchInn!!!</h3> 
-	</div>
+	<div>
+		<div class="col-md-2"></div>
+	</div> 
+
 	<div class="col-md-2"><br>
 		<% if current_user %> 
-			<%= button_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %> 
+			<%= button_to 'Cerrar Sesión', destroy_user_session_path, method: :delete ,  class: 'btn btn-info btn-sm' %> 
 		<% else %>
-    		<%= link_to 'Iniciar Sesión', new_user_session_path %>
+    		<%= link_to 'Iniciar Sesión', new_user_session_path,  class: 'btn btn-info btn-sm'  %>
 		<% end %>
 	</div>
 
 	<div class="col-md-2"><br>
 		<% if current_user and can? :read, User %>
-		<%= link_to current_user.first_name+" Perfil", current_user %>
+		<%= link_to current_user.first_name , current_user,  class: 'btn btn-info btn-sm' %>
+		<% 
+		cant = 0
+		Reservation.all.each do |res|  
+			if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed)
+				cant = cant + 1
+			end
+		end 
+		%>
+ 		<%= link_to cant , "/reservation/index" ,  class: 'btn btn-info btn-sm' %>
 		<% end %>
 	</div>
 
 	<div class="col-md-2"><br>
-		<%= link_to 'Lista de Couchs', couchs_path %>
+		<%= link_to 'Buscar Couchs', "/",  class: 'btn btn-info btn-sm' %>
 	</div>
 
 	<div class="col-md-2"><br>
 		<% if current_user and can? :crud, User %>
-			<%= link_to 'Lista de Usuarios', users_path %> 		
+			<%= link_to 'Lista de Usuarios', users_path ,  class: 'btn btn-info btn-sm' %> 		
 		<% end %>
 	</div>
 
 	<div class="col-md-2"><br>
 		<% if current_user and can? :crud, CouchType %>
-			<%= link_to 'Tipos de couch', "/couch_type" %>  
+			<%= link_to 'Tipos de couch', "/couch_type",  class: 'btn btn-info btn-sm'  %>  
 		<% end %>
 	</div>
+
 </div>
 
 <br><br>

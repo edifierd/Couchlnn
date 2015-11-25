@@ -1,3 +1,6 @@
 class CouchType < ActiveRecord::Base
-	belongs_to :couch
+	validates :titulo,
+	presence: true, 
+	uniqueness: true
+
 end

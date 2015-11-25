@@ -7,14 +7,14 @@
 		<div class="row">
 			<div class="col-md-6">
 				<%= f.label :titulo %>
-  				<%= f.text_area :titulo, class: 'form-control', label: 'titulo', placeholder: 'Ingrese el titulo del couch' %>
+  				<%= f.text_area :titulo, class: 'form-control', label: 'titulo', placeholder: 'Ingrese el titulo del couch', :required => true %>
   			</div>
   		</div>
 
 		<div class="row">
 			<div class="col-md-6">
-				<%= f.label :descripcion %>
-  				<%= f.text_area :descripcion, class: 'form-control', label: 'descripcion', placeholder: 'Ingrese la descripcion' %>
+				<%= f.label :descripcion %>    
+  				<%= f.text_area :descripcion, class: 'form-control', label: 'descripcion', placeholder: 'Ingrese la descripcion', :required => true %>
   			</div>
   		</div>
 

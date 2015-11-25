@@ -17,12 +17,13 @@ class Ability
         can :crud , User , :id => user.id
         can :cr , Couch
         can :ud , Couch , :user_id => user.id
+        can :crud, Reservation
     end
     if user.has_role? :admin
-        #can :manage, :all
         can :crud, User
         can :crud, CouchType
         can :crud, Couch
+        can :crud, Reservation
     else 
         can :read, Couch
     end

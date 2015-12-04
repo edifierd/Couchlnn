@@ -46,8 +46,8 @@ url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <div class="row">
         <div class="col-md-12" style="margin-top: 20px">
           <%= f.label :Nombre_y_Apellido %> 
-          <%= f.text_field :first_name, value: @user.first_name %>
-          <%= f.text_field :last_name, value: @user.last_name %>
+          <%= f.text_field :first_name %>
+          <%= f.text_field :last_name %>
         </div>
       </div>
       <div class="row">
@@ -55,23 +55,25 @@ url: registration_path(resource_name), html: { method: :put }) do |f| %>
          <%= f.label :Tipo_de_cuenta %></i>
           <% if @user.has_role? :admin %>
             Administrador
-          <% end %>
-          <% if @user.has_role? :premium %> 
-            Premium 
-          <% else %> 
-            Estandar <%= link_to 'Ser Premium',"/ser_premium/index" , class: 'btn btn-warning btn-xs' %>
+          <% else %>
+            <% if @user.has_role? :premium %> 
+              Premium 
+            <% else %> 
+              Estandar  
+              <%= link_to 'Ser Premium',"/ser_premium/index" , class: 'btn btn-warning btn-xs' %>
+            <% end %>
           <% end %>
         </p>
         </div>
       </div>
       <div class="row">
       <div class="col-md-12"><%= f.label :email, "Correo: "%>
-      <%= f.email_field :email, autofocus: true, value: @user.email %>
+      <%= f.email_field :email, autofocus: true %>
       </div>
     </div>
       <div class="row">
         <div class="col-md-12"><%= f.label :age , "Edad: " %> 
-        <%= f.text_field :age, value: @user.age%> </div>
+        <%= f.text_field :age, devise_error_messages: "Debe ser mayor a 18"%> </div>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -98,7 +100,7 @@ url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <div class="row">
         <div class="col-md-12">
             <%= f.label :secret_question, "¿Cuál es tu color favorito?: " %>
-            <%= f.text_field :secret_question, autocomplete: "off", value: @user.secret_question %>
+            <%= f.text_field :secret_question, autocomplete: "off" %>
         </div>
       </div>
   </div>

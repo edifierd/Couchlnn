@@ -1,31 +1,37 @@
 <%= render "home/menu" %>
 
 <table class="table">
-	<tr>
-		<td>Usuario</td><td>Fecha Inicio</td><td>Fecha Final</td><td>Couch</td><td></td><td></td>
-	</tr>
-<%  Reservation.all.each do |res|  
-  if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed) %>
+   <tr>
+       <td>Usuario</td>
+       <td>Fecha Inicio</td>
+       <td>Fecha Final</td>
+       <td>Couch</td>
+       <td></td>
+       <td></td>
+   </tr>
+   <%  
+   Reservation.all.each do |res|  
+       if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed) 
+   %>
        <tr>
-       	    <td>
-       	    	<%= User.find(res.user_id).first_name %>
-       	    </td>
-       	    <td>
-       	    	<%= res.start_date %>
-       	    </td>
-       	    <td>
-       	    	<%= res.end_date %>
-       	    </td>
-       	    <td>
-       	    	<%= Couch.find(res.couch_id).titulo %>
-       	    </td>
-       	    <td>
-       	    	<%= link_to "Aceptar",  edit_reservation_path(res) , class: 'btn btn-success btn-sm' %>
-       	    </td>
-       	    <td>
-       	    	<%= link_to "Rechazar", res, method: :delete, class: 'btn btn-danger btn-sm' %>
-       	    </td>
+          <td>
+       	<%= link_to User.find(res.user_id).first_name, User.find(res.user_id)  %>
+          </td>
+          <td>
+       	<%= res.start_date %>
+          </td>
+          <td>
+       	<%= res.end_date %>
+          </td>
+          <td>
+       	<%= Couch.find(res.couch_id).titulo %>
+          </td>
+          <td>
+       	<%= link_to "Aceptar",  edit_reservation_path(res) , class: 'btn btn-success btn-sm' %>
+          </td>
+          <td>
+       	<%= link_to "Rechazar", res, method: :delete, class: 'btn btn-danger btn-sm' %>
+          </td>
        </tr> 
-<% end end %>
-
+   <% end end %>
 </table>

@@ -22,7 +22,7 @@ class CouchTypeController < ApplicationController
     @couch_type.descripcion = params[:couch_type][:descripcion]
     @couch_type.enabled = params[:couch_type][:enabled]
     @couch_type.save
-    redirect_to (@couch_type)    
+    redirect_to "/couch_type"  
   end
     
   def create
@@ -35,7 +35,7 @@ class CouchTypeController < ApplicationController
       redirect_to "/couch_type/new"
     else 
       @couch_type.save
-      redirect_to (@couch_type)
+      redirect_to "/couch_type"
     end
   end
 
@@ -43,7 +43,7 @@ class CouchTypeController < ApplicationController
   	@couch_type = CouchType.find(params[:id])
   	@couch_type.enabled = false
     @couch_type.save
-  	redirect_to (@couch_type)
+  	redirect_to "/couch_type"
   end
 end
 

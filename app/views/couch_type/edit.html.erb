@@ -3,7 +3,7 @@
 
 <% if can? :update,  @couch_type %>
 <div class="container">
-	<h1> EDITA UN COUCH !!!!!!</h1>
+	<h1> Editando tipo de couch</h1>
 
 	<%= form_for @couch_type , url: {action:"update"} do |f| %>
 		
@@ -22,12 +22,12 @@
   		</div>
   		<div class="row">
 			<div class="col-md-6">
-				<%= f.label :enabled %>
+				<%= f.label :enabled, "Estado" %>
   				<%= f.check_box :enabled, class: 'form-control', label: 'enabled' %>
   			</div>
   		</div>
 
-  		<%= f.submit "Crear couch tipo", class: 'btn btn-primary' %>
+  		<%= f.submit "Guardar cambios", class: 'btn btn-primary' %>
   	</div>
 <% end %>
 </div>

@@ -1,7 +1,7 @@
 <%= render "home/menu" %>
 
 <h1> Couch</h1>
-<%= image_tag @couch.url_foto , :alt => "Foto",  size: "150x150"%>
+<%= image_tag @couch.url_foto , :alt => "Foto",  height: 'auto', width: '350'%>
 <table class="table">
 	<tr>
 		<th>Titulo</th>
@@ -28,7 +28,4 @@
 			<% end %>
 		</td>
 	</tr>
-	
-	
-
 </table>

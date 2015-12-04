@@ -19,16 +19,9 @@ class CouchsController < ApplicationController
     @couch.user_id = current_user.id
     @couch.couch_type_id = params[:couch][:couch_type_id]
     @couch.enable = true
-
-    uploaded_io = params[:couch][:url_foto]
-    if (uploaded_io != nil)
-    File.open(Rails.root.join('app/assets/images/', uploaded_io.original_filename), 'wb') do |file|
-      file.write(uploaded_io.read)
-      @couch.url_foto =  uploaded_io.original_filename
-    end
-    end
+    @couch.url_foto = params[:couch][:url_foto]
     @couch.save
-    redirect_to "/"
+    redirect_to @couch
   end
 
 
@@ -45,15 +38,10 @@ class CouchsController < ApplicationController
     @couch.enable = true
     @couch.location = params[:ubicacion]
     @couch.capacity = params[:capacity]
-
-    uploaded_io = params[:couch][:url_foto]
-    File.open(Rails.root.join('app/assets/images/', uploaded_io.original_filename), 'wb') do |file|
-    file.write(uploaded_io.read)
-
-    @couch.url_foto =  uploaded_io.original_filename
-  end
+    @couch.url_foto = params[:couch][:url_foto]
     @couch.save
-    redirect_to "/"
+
+    redirect_to @couch
   end
 
   def destroy

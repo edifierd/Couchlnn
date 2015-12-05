@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
+  get 'acerca_de/index'
   get 'couchs/index'
   get 'couch_type/index'
   get 'user/index'

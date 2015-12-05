@@ -82,8 +82,12 @@
       <% couchs.each do |couch| %>
             <tr>
                   <td> 
-                  <% if couch.user.has_role? :premium %> 
-                        <%= image_tag couch.url_foto , :alt => "Sin Foto",  height: 'auto', width: '170' %> 
+                  <%= link_to couch do %>
+                        <% if couch.user.has_role? :premium %>
+                              <%= image_tag couch.url_foto, :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+                        <% else %>
+                              <%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+                        <% end %>
                   <% end %>
                   </td>
                   <td> <%= link_to couch.titulo, couch %> </td>

@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+#para no usar Node
+gem 'therubyracer'
 
 # Manejo de usuarios
 gem 'devise'

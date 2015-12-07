@@ -12,7 +12,6 @@ class ReservationController < ApplicationController
   end
 
   def edit
-     
     @reservation = Reservation.find(params[:id])
     @couch=Couch.find(@reservation.couch_id)
     @reservation.confirmed = true
@@ -36,7 +35,10 @@ class ReservationController < ApplicationController
     @couch=Couch.find(params[:couch_id])
     @reservation = @couch.reservations.new
     @reservation.user_id = current_user.id
+<<<<<<< HEAD
     @reservation.start_date = params[:reservation][:start_date]
+=======
+>>>>>>> 51adf36469fb385eba1dd66e5464d44015610f9a
     @reservation.start_date = Date.civil( params[:reservation]["start_date(1i)"].to_i,
                                           params[:reservation]["start_date(2i)"].to_i,
                                           params[:reservation]["start_date(3i)"].to_i)
@@ -45,6 +47,7 @@ class ReservationController < ApplicationController
                                           params[:reservation]["end_date(2i)"].to_i,
                                           params[:reservation]["end_date(3i)"].to_i)
     @reservation.confirmed = false
+<<<<<<< HEAD
     ok = (@couch.is_free?(@reservation.start_date,@reservation.end_date))
     if (ok)
       flash[:success] = "RESERVA ADQUIRIDA"
@@ -55,6 +58,14 @@ class ReservationController < ApplicationController
       redirect_to (:back)
     end
 
+=======
+    
+    if (@couch.is_free?(@reservation.start_date,@reservation.end_date))
+      @reservation.save
+    end
+
+    redirect_to current_user 
+>>>>>>> 51adf36469fb385eba1dd66e5464d44015610f9a
     end
 
   def destroy

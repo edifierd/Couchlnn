@@ -1,5 +1,18 @@
 <%= render "home/menu" %>
 
+<script type="text/javascript">
+	function muestra_oculta(contenido){
+		document.getElementById("calificaciones").style.display = "none";
+		document.getElementById("calificacionesDadas").style.display = "none";
+		document.getElementById("couchs").style.display = "none";
+		document.getElementById("couchVisitados").style.display = "none";
+		<% if current_user.id == @user.id %>
+		document.getElementById("reservas").style.display = "none";
+		<% end %>
+		document.getElementById(contenido).style.display = "block";
+
+	}
+</script>
 
 <style type="text/css">
   p{ 
@@ -9,13 +22,16 @@
 </style>
 	
 
+<!-- DATOS DE USUARIO -->
+
 <div class="row" style="
 	padding: 50px; 
 	padding-top: 5px;
 	padding-bottom: 5px;
 	background-color: #D8D8D8; 
 	margin-right:30px; 
-	margin-left:30px;"
+	margin-left:30px;
+	"
 >     
 	<div class="row">
 		<div class="col-md-10">
@@ -73,14 +89,116 @@
 </div>
 
 
-<div class="row" style="
+<div class="row">
+
+	<div class="row" style="background-color:#F2F2F2; margin-top:15px; margin-bottom:15px; padding-top: 7px; padding-bottom: 7px;">
+		<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm" onclick="muestra_oculta('calificaciones')" >Calificación
+	  		</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('calificacionesDadas')" >Calificaciones Dadas</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm" onclick="muestra_oculta('couchs')">
+	  		Couchs</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('couchVisitados')" >Couchs Visitados</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<% if current_user.id == @user.id %>
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('reservas')" >Mis Reservas</a>
+	  		<% end %>
+	  	</div>
+	  	<div class="col-md-2" align="center" ></div>
+	</div>
+</div>
+
+<!-- CALIFICACIONES DEL USUARIO ACTUAL -->
+
+<div id="calificaciones" class="row" style="
 	padding: 50px; 
 	padding-top: 5px;
 	padding-bottom: 5px;
 	background-color: #D8D8D8; 
 	margin-right:30px; 
 	margin-left:30px;
-	margin-top: 15px"
+	margin-top: 15px;
+	margin-bottom:20px;
+	display:block;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Calificación</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+</div>
+
+
+<!-- CALIFICACIONES DADAS A OTROS USUARIOS -->
+
+<div id="calificacionesDadas" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:20px;
+	display:none;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Calificaciones Dadas</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+</div>
+
+<!-- COUCHS QUE VISITO EL USUARIO -->
+
+<div id="couchVisitados" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:20px;
+	display:none;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Couchs Visitados</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+</div>
+
+<!-- LISTA DE COUCH DEL USUARIO -->
+
+<div id="couchs" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	display:none;"
 >     
 	<div class="row">
 		<div class="col-md-10">
@@ -115,12 +233,20 @@
 				</tr>
 				<% @user.couchs.each do |couch| %>
 				<tr>
-					<td><%= image_tag couch.url_foto, :alt => "Sin Foto",  height: 'auto', width: '170' %></td>
+					<td>
+					<%= link_to couch do %>
+						<% if couch.user.has_role? :premium %>
+							<%= image_tag couch.url_foto, :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+						<% else %>
+							<%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+						<% end %>
+					<% end %>
+					</td>
 					<td><%= link_to couch.titulo, couch %></td>
-					<td><%= couch.descripcion %></td>
+					<td><%= couch.descripcion%></td>
 					<td><%= CouchType.find(couch.couch_type_id).titulo %></td>
-					<td><%= couch.avivable_in_date%></td>
-					<td><%= couch.avivable_out_date%></td>
+					<td><%= couch.init_date%></td>
+					<td><%= couch.out_date%></td>
 					<td>
 					<% if couch.enable %>Disponible
 					<% else %>No Disponible<%end%>
@@ -142,9 +268,11 @@
 	</div>
 </div>
 
-<% if current_user.id == @user.id %>
 
-<div class="row" style="
+<!-- RESERVAS PENDIENTES O REALIZADAS -->
+
+<% if current_user.id == @user.id %>
+<div id="reservas" class="row" style="
 	padding: 50px; 
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -152,7 +280,8 @@
 	margin-right:30px; 
 	margin-left:30px;
 	margin-top: 15px;
-	margin-bottom:40px;"
+	margin-bottom:40px;
+	display:none;"
 >     
 	<div class="row">
 		<div class="col-md-12"><h2>Mis Couchs Reservados</h2></div>
@@ -173,8 +302,18 @@
 
 			<% Reservation.where( "user_id = "+ @user.id.to_s  ).all.each do |res| %>
 				<tr>
-					<td><%= image_tag Couch.find(res.couch_id).url_foto, :alt => "FOTITO rota",  size: "120x120" %></td>
-					<td><%=  Couch.find(res.couch_id).titulo %></td>
+					<td>
+					<%= link_to Couch.find(res.couch_id) do %>
+                        <% if Couch.find(res.couch_id).user.has_role? :premium %>
+                              <%= image_tag Couch.find(res.couch_id).url_foto, :alt => "Sin Foto",  height: 'auto', width: '120', class: "img-rounded" %>
+                        <% else %>
+                              <%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '120', class: "img-rounded" %>
+                        <% end %>
+                  <% end %>
+
+
+					</td>
+					<td><%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %></td>
 					<td><%=  Couch.find(res.couch_id).descripcion %></td>
 					<td><%=  CouchType.find(Couch.find(res.couch_id).couch_type_id).titulo %></td>
 					<td><%=  res.start_date %></td>

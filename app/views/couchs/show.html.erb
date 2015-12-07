@@ -1,33 +1,175 @@
 <%= render "home/menu" %>
 
-<h1> Couch</h1>
-<%= image_tag @couch.url_foto , :alt => "Foto",  height: 'auto', width: '350'%>
-<table class="table">
-	<tr>
-		<th>Titulo</th>
-		<th>Descripcion</th>
-		<th>Tipo</th>
-		<th>Capacidad</th>
-		<th>Ubicación</th>
-		<th>Estado</th>
-		<th>Usuario</th>
-	</tr>
-	<tr>
-		<td> <%= @couch.titulo %> </td>  
-		<td> <%= @couch.descripcion %> </td> 
-		<td> <%= CouchType.find( @couch.couch_type_id).titulo %> </td>  
-		<td> <%= @couch.capacity %> </td>  
-		<td> <%= @couch.location %> </td>  
-		<td> <%= (@couch.enable) ? "Disponible" : "No Disponible"  %> </td>
-		<td> <%= link_to User.find( @couch.user_id ).first_name , User.find(@couch.user_id) %> </td>  
-	</tr>
-	<tr>
-		<td colspan="7" align="center">
-			<% if current_user %>
-				<% if current_user.id != @couch.user_id %>
-					<%= link_to "Reservar", reservation_path, class: 'btn btn-success btn-sm' %>
-				<% end %>
+<style type="text/css">
+  p{ 
+	font-size: 17px;
+	margin-left: 15px;
+  }	
+</style>
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-bottom: 20px;"
+>     
+	<div class="row">
+		<div class="col-md-10">
+			<h2><%= @couch.titulo %></h2>
+		</div>
+		<div class="col-md-2" style="margin-top: 10px">
+		<% if current_user  %>
+			<% if can? :update, @couch %>
+			<%= link_to "Editar", edit_couch_path(@couch), class: 'btn btn-info btn-lg' %>
+			<% else %>
+				<%= link_to "Reservar", reservation_path, class: 'btn btn-success btn-lg' %>
 			<% end %>
-		</td>
-	</tr>
+		<% end %>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+	  	<div class="row">
+	  		<div class="col-md-4" >
+	  		<%= image_tag @couch.url_foto , :alt => "Foto",  
+	  			height: 'auto', width: '315', style:"margin-top:30px;" %>
+	  		</div>
+	  		<div class="col-md-8">
+	  		<div class="row">
+	  		<div class="col-md-12" style="margin-top: 20px">
+	  			<p><i>Descripción:  </i><b><%= @couch.descripcion %></b></p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p>
+	  		<i>Tipo:</i>
+	  		<%= CouchType.find( @couch.couch_type_id).titulo %>
+	  		</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12"><p><i>Capacidad:</i> <%= @couch.capacity %> </p></div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Ubicación:</i>  <%= @couch.location %> </p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Estado: </i><%= (@couch.enable) ? "Disponible" : "No Disponible"  %></p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Fecha inicio: </i> Hay que editar desp del merge</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Fecha final: </i> Hay que editar desp del merge</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Propietario:</i>
+	  		<%= link_to User.find( @couch.user_id ).first_name , User.find(@couch.user_id) %>
+	  		</p>
+	  		</div>
+	  	</div>
+	</div>
+	</div>
+	</div>
+</div>
+
+<!-- CALIFICACIONES DEL COUCH ACTUAL -->
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:20px;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Calificación</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+</div>
+
+
+<!-- SOLICITUDES DE RESERVA PARA EL COUCH ACTUAL -->
+
+<% if current_user and current_user.id == @couch.user_id %>
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:40px;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Solicitudes de Reserva</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			<table class="table">
+   <tr>
+       <td>Usuario</td>
+       <td>Fecha Inicio</td>
+       <td>Fecha Final</td>
+       <td>Couch</td>
+       <td></td>
+       <td></td>
+   </tr>
+   <%  
+   Reservation.all.each do |res|  
+       if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed) and (res.couch_id == @couch.id)
+   %>
+       <tr>
+          <td>
+        <%= link_to User.find(res.user_id).first_name, User.find(res.user_id)  %>
+          </td>
+          <td>
+        <%= res.start_date %>
+          </td>
+          <td>
+        <%= res.end_date %>
+          </td>
+          <td>
+        <%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %>
+          </td>
+          <td>
+        <%= link_to "Aceptar",  edit_reservation_path(res) , class: 'btn btn-success btn-sm' %>
+          </td>
+          <td>
+        <%= link_to "Rechazar", res, method: :delete, class: 'btn btn-danger btn-sm' %>
+          </td>
+       </tr> 
+   <% end end %>
 </table>
+		</div>
+	</div>
+</div>
+
+<% end %>
+
+
+
+

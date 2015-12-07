@@ -71,8 +71,7 @@
       <td>
       <%= f.text_area :descripcion, class: 'form-control', label: 'descripcion', placeholder: 'Ingrese la descripción' , :required => true %>
         </td>
-    </tr>
-      
+    </tr>      
       <td class="col-md-6">
         <%= f.label "Fecha de inicio de disponibilidad" %>
           <%= f.date_select :avivable_in_date, :order => [:day, :month, :year], :required => true %>
@@ -82,7 +81,6 @@
           <%= f.date_select :avivable_out_date, :order => [:day, :month, :year] , :required => true %>
         </td>
       </tr>
-
     <tr>
       <td colspan="2" align="center" >
   		  <%= f.submit "Crear couch", class: 'btn btn-primary' %>

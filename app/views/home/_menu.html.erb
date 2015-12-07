@@ -19,15 +19,10 @@
 	<div class="col-md-2"><br>
 		<% if current_user and can? :read, User %>
 		<%= link_to current_user.first_name , current_user,  class: 'btn btn-info btn-sm' %>
-		<% 
-		cant = 0
-		Reservation.all.each do |res|  
-			if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed)
-				cant = cant + 1
-			end
-		end 
-		%>
- 		<%= link_to cant , "/reservation/index" ,  class: 'btn btn-info btn-sm' %>
+ 		<%= link_to "/notificaciones/index" ,  class: 'btn btn-info btn-sm' do  %>
+ 			<%= image_tag "notification.png" , height: '20', width: 'auto'%>
+ 			<b><%= cantidadNotificaciones %></b>
+ 		<% end %>
 		<% end %>
 	</div>
 

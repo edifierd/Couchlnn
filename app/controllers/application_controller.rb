@@ -8,4 +8,21 @@ class ApplicationController < ActionController::Base
     render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false
   end
 
+helper_method :cantidadNotificaciones
+
+def cantidadNotificaciones
+	cant = 0
+	Reservation.all.each do |res|  
+		if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed)
+			cant = cant + 1
+		end
+	end 
+	cant
+end
+
+def reservasFinalizadas
+	
+end
+
+
 end

@@ -33,10 +33,10 @@ class CouchsController < ApplicationController
     pasado_out = ( @couch.avivable_out_date < Date.today )
     
     if(pasado_in)
-      flash[:danger] = "NO SE PUEDE SELECCIONAR DE INICIO UNA FECHA EN EL PASADO!!!!1oNE!"
+      flash[:danger] = "NO SE PUEDE SELECCIONAR DE INICIO UNA FECHA EN EL PASADO!!!"
       redirect_to (:back)
     elsif (pasado_out)
-      flash[:danger] = "NO SE PUEDE SELECCIONAR DE FINALIZACION UNA FECHA EN EL PASADO!!!!1oNE!"
+      flash[:danger] = "NO SE PUEDE SELECCIONAR DE FINALIZACION UNA FECHA EN EL PASADO!!!"
       redirect_to (:back)
     elsif(@couch.save)
       flash[:success] = "ok"
@@ -61,6 +61,7 @@ class CouchsController < ApplicationController
     @couch.location = params[:ubicacion]
     @couch.capacity = params[:capacity]
     @couch.url_foto = params[:couch][:url_foto]
+<<<<<<< HEAD
 
     @couch.avivable_in_date = params[:couch][:avivable_in_date]
     @couch.avivable_in_date = Date.civil( params[:couch]["avivable_in_date(1i)"].to_i,
@@ -87,11 +88,20 @@ class CouchsController < ApplicationController
       render 'new'
     end
     
+=======
+    @couch.save
+
+    redirect_to @couch
+>>>>>>> 51adf36469fb385eba1dd66e5464d44015610f9a
   end
 
   def destroy
   	@couch = Couch.find(params[:id])
   	@couch.destroy
+<<<<<<< HEAD
   	redirect_to (:back)
+=======
+  	redirect_to couchs_path
+>>>>>>> 51adf36469fb385eba1dd66e5464d44015610f9a
   end
 end

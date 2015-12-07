@@ -1,0 +1,161 @@
+<%= render "home/menu" %>
+
+<style type="text/css">
+  p{ 
+  font-size: 17px;
+  margin-left: 15px;
+  } 
+</style>
+
+<div class="row">
+  <div class="col-md-12" style="margin-left:15px;"><h2>Notificaciones</h2></div>
+</div>
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:20px;"
+>     
+  <div class="row">
+    <div class="col-md-12"><h4>Solicitudes pendientes de reserva</h4></div>
+  </div>
+
+  <div class="row" style="background-color:#F2F2F2">
+    <div class="col-md-12">
+      <table class="table">
+   <tr>
+       <td>Usuario</td>
+       <td>Fecha Inicio</td>
+       <td>Fecha Final</td>
+       <td>Couch</td>
+       <td></td>
+       <td></td>
+   </tr>
+   <%  
+   Reservation.all.each do |res|  
+       if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed) 
+   %>
+       <tr>
+          <td>
+        <%= link_to User.find(res.user_id).first_name, User.find(res.user_id)  %>
+          </td>
+          <td>
+        <%= res.start_date %>
+          </td>
+          <td>
+        <%= res.end_date %>
+          </td>
+          <td>
+        <%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %>
+          </td>
+          <td>
+        <%= link_to "Aceptar",  edit_reservation_path(res) , class: 'btn btn-success btn-sm' %>
+          </td>
+          <td>
+        <%= link_to "Rechazar", res, method: :delete, class: 'btn btn-danger btn-sm' %>
+          </td>
+       </tr> 
+   <% end end %>
+</table>
+    </div>
+  </div>
+</div>
+
+<!-- USUARIO PARA CALIFICAR-->
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:20px;"
+>     
+  <div class="row">
+    <div class="col-md-12"><h4>Calificar Usuario</h4></div>
+  </div>
+
+  <div class="row" style="background-color:#F2F2F2">
+    <div class="col-md-12">
+      
+    </div>
+  </div>
+</div>
+
+
+<!-- COUCH PARA CALIFICAR-->
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:20px;"
+>     
+  <div class="row">
+    <div class="col-md-12"><h4>Calificar Couch</h4></div>
+  </div>
+
+  <div class="row" style="background-color:#F2F2F2">
+    <div class="col-md-12">
+      
+    </div>
+  </div>
+</div>
+
+
+<!-- NOTIFICACION NUEVA PREGUNTA -->
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:20px;"
+>     
+  <div class="row">
+    <div class="col-md-12"><h4>Nueva pregunta en tu couch</h4></div>
+  </div>
+
+  <div class="row" style="background-color:#F2F2F2">
+    <div class="col-md-12">
+      
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICACION NUEVA RESPUESTA-->
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:20px;"
+>     
+  <div class="row">
+    <div class="col-md-12"><h4>Nueva respuesta </h4></div>
+  </div>
+
+  <div class="row" style="background-color:#F2F2F2">
+    <div class="col-md-12">
+      
+    </div>
+  </div>
+</div>

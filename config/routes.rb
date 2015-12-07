@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'notificaciones/index'
+
   devise_for :users, :controllers => { registrations: 'registrations' }
 
+  get 'acerca_de/index'
+  get 'user_calification/index'
   get 'couchs/index'
   get 'couch_type/index'
   get 'user/index'

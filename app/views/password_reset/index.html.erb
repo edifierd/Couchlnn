@@ -1,0 +1,27 @@
+<%= render "home/menu" %>
+
+<%= form_tag '/password_reset/new' do %>
+	
+	<table class="table">
+		<tr>
+			<td>
+			<%= label_tag :email, 'Correo: ' %>
+			</td>
+			<td>
+				<%= text_field_tag :email %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<%= label_tag :secret_question, "Pregunta secreta: ¿Cuál es tu color favorito?" %>
+			</td>
+			<td>
+				<%= text_field_tag :secret_question %>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+			<%= submit_tag 'Recuperar Contraseña', class: "btn btn-danger" %></td>
+		</tr>
+	</table>
+<% end %>

@@ -1,0 +1,33 @@
+<%= render "home/menu" %>
+
+<h1> Couch</h1>
+<%= image_tag @couch.url_foto , :alt => "Foto",  height: 'auto', width: '350'%>
+<table class="table">
+	<tr>
+		<th>Titulo</th>
+		<th>Descripcion</th>
+		<th>Tipo</th>
+		<th>Capacidad</th>
+		<th>Ubicación</th>
+		<th>Estado</th>
+		<th>Usuario</th>
+	</tr>
+	<tr>
+		<td> <%= @couch.titulo %> </td>  
+		<td> <%= @couch.descripcion %> </td> 
+		<td> <%= CouchType.find( @couch.couch_type_id).titulo %> </td>  
+		<td> <%= @couch.capacity %> </td>  
+		<td> <%= @couch.location %> </td>  
+		<td> <%= (@couch.enable) ? "Disponible" : "No Disponible"  %> </td>
+		<td> <%= link_to User.find( @couch.user_id ).first_name , User.find(@couch.user_id) %> </td>  
+	</tr>
+	<tr>
+		<td colspan="7" align="center">
+			<% if current_user %>
+				<% if current_user.id != @couch.user_id %>
+					<%= link_to "Reservar", reservation_path, class: 'btn btn-success btn-sm' %>
+				<% end %>
+			<% end %>
+		</td>
+	</tr>
+</table>

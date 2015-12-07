@@ -1,0 +1,63 @@
+<%= render "home/menu" %>
+
+<%= form_tag '/ser_premium/new', onsubmit: "
+					var num = document.getElementById('num');
+					var num_length = num.value.length;
+					var nombre = document.getElementById('nombre');
+					var nombre_length = nombre.value.length;
+					var estado = true;
+					if (nombre_length < 4){
+						alert ('Nombre incorrecto');
+					  	estado = false;
+					}
+					if ((num_length != 16) || (isNaN(num.value))){
+						alert ('Numero de tarjeta invalido');
+					  	estado = false;
+                    } 
+                    return estado " do %>
+	
+	<table class="table"> 
+		<tr>
+			<td><%= label_tag :pais, 'País: ' %></td>
+			<td><%= select_tag "Pais", "
+				<option>Australia</option>
+				<option>Argentina</option>
+				<option>Brasil</option>
+				<option>España</option>".html_safe %></td>
+		</tr>
+		<tr>
+			<td><%= label_tag :tipo, 'Tarjeta: ' %></td>
+			<td><%= select_tag "Pais", "
+				<option>VISA</option>
+				<option>Mastercard</option>".html_safe %></td>
+		</tr>
+		<tr>
+			<td>
+			<%= label_tag :nombre, 'Nombre Títular: ' %>
+			</td>
+			<td>
+				<%= text_field_tag :nombre %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= label_tag :secret, "Código de seguridad" %>
+			</td>
+			<td>
+				<%= password_field_tag :secret %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= label_tag :num, "Nº de Tarjeta: " %>
+			</td>
+			<td>
+				<%= text_field_tag :num %>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><%= submit_tag 'Comprar cuenta Premium', class: "btn btn-danger" %></td>
+		</tr>
+	</table>
+	
+<% end %>

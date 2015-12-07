@@ -1,0 +1,19 @@
+<%= render "home/menu" %>
+
+
+<h1> Listado de Usuarios </h1>
+
+<table class="table">
+
+	<tr>
+		<th> Email </th>
+		
+	</tr>
+
+	<% @users.each do |user| %>
+		<tr>
+			<td> <%= link_to user.email, user %> </td>
+		</tr>
+	<% end %>
+
+</table>

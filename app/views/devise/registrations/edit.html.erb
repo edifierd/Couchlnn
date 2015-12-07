@@ -1,0 +1,139 @@
+<%= render "home/menu" %>
+
+<style type="text/css">
+  p{ 
+  font-size: 17px;
+  margin-left: 15px;
+  } 
+</style>
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;"
+> 
+
+<%= form_for(resource, as: resource_name, 
+url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= devise_error_messages! %>
+
+  <div class="row">
+    <div class="col-md-7"><h2>Modificar Datos</h2></div>
+    <div class="col-md-3">
+      <%= f.label :Contraseña_actual %>
+      <%= f.password_field :current_password, autocomplete: "off" %>
+    </div>
+    <div class="col-md-2" style="margin-top: 20px">
+        <%= f.submit "Guardar cambios", class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-7"></div>
+    <div class="col-md-5">
+      <i>(Ingrese su contraseña para confirmar los cambios)</i>
+    </div>
+  </div>
+
+  <div class="row" style="background-color:#F2F2F2">
+      <div class="row">
+        <div class="col-md-2" style="margin-top: 35px;">
+        <%= image_tag "rails.png", :alt => "Avatar",  size: "120x120" %>
+        </div>
+        <div class="col-md-10">
+        <div class="row">
+        <div class="col-md-12" style="margin-top: 20px">
+          <%= f.label :Nombre_y_Apellido %> 
+          <%= f.text_field :first_name %>
+          <%= f.text_field :last_name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+         <%= f.label :Tipo_de_cuenta %></i>
+          <% if @user.has_role? :admin %>
+            Administrador
+          <% else %>
+            <% if @user.has_role? :premium %> 
+              Premium 
+            <% else %> 
+              Estandar  
+              <%= link_to 'Ser Premium',"/ser_premium/index" , class: 'btn btn-warning btn-xs' %>
+            <% end %>
+          <% end %>
+        </p>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col-md-12"><%= f.label :email, "Correo: "%>
+      <%= f.email_field :email, autofocus: true %>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-md-12"><%= f.label :age , "Edad: " %> 
+        <%= f.text_field :age, devise_error_messages: "Debe ser mayor a 18"%> </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.label :genre, "Genero: " %> 
+          <%= f.select :genre, ['Masculino', 'Femenino'] %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+            <%= f.label :password, "Contraseña: "%> 
+            <%= f.password_field :password, autocomplete: "off" %>
+            <i>(Dejar en blanco si no desea modificarlo)</i>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+            <%= f.label :password_confirmation, "Confirmar contraseña: " %>
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+            <%= f.label :secret_question, "¿Cuál es tu color favorito?: " %>
+            <%= f.text_field :secret_question, autocomplete: "off" %>
+        </div>
+      </div>
+  </div>
+  </div>
+  </div>
+</div>
+<% end %>
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top:15px;
+  margin-bottom: 30px;"
+>     
+  <div class="row">
+    <div class="col-md-12"><h2>Eliminar Cuenta</h2></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"><p>¿Insatisfecho?</p></div>
+    <div class="col-md-10">
+      <%= button_to "Eliminar Cuenta", registration_path(resource_name), data: { confirm: "¿ Esta seguro ?" }, method: :delete, class: "btn btn-danger" %> 
+      <i>(También seran eliminados los Couch de la cuenta)</i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

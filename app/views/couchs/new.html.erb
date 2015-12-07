@@ -1,0 +1,93 @@
+<%= render "home/menu" %>
+
+<h1> Crear un couch </h1>
+
+<%= form_for @couch , url: {action:"create"} do |f| %>
+	<table class="table">
+    <tr>
+      <td><%= f.label :titulo %></td>
+			<td>
+      <%= f.text_field :titulo, label: 'titulo', placeholder: 'Ingrese el titulo' , :required => true , size: 50 %>
+  		</td>
+  	</tr>
+
+    <tr>
+      <td><%= f.label "Tipo de Couch" %></td>
+      <td>
+  		<%= collection_select :couch, :couch_type_id, CouchType.all, :id, :titulo %>
+  		</td>
+  	</tr>
+
+    <tr>
+      <td><%= f.label "Ubicación del Couch" %></td>
+      <td>
+        <!-- Script by todorotosoft.com -->
+        <select name=ubicacion>
+          <option value="Buenos Aires">Buenos Aires</option>
+          <option value="Buenos Aires Capital">Buenos Aires Capital</option>
+          <option value="Catamarca">Catamarca</option>
+          <option value="Chaco">Chaco</option>
+          <option value="Chubut">Chubut</option>      
+          <option value="Uruguay">Uruguay</option>      
+          <option value="Cordoba">Cordoba</option>
+          <option value="Corrientes">Corrientes</option>
+          <option value="Entre Rios">Entre Rios</option>
+          <option value="Formosa">Formosa</option>
+          <option value="Jujuy">Jujuy</option>
+          <option value="La Pampa">La Pampa</option>
+          <option value="La Rioja">La Rioja</option>
+          <option value="Mendoza">Mendoza</option>
+          <option value="Misiones">Misiones</option>
+          <option value="Neuquen">Neuquen</option>
+          <option value="Rio Negro">Rio Negro</option>
+          <option value="Salta">Salta</option>
+          <option value="San Juan">San Juan</option>
+          <option value="San Luis">San Luis</option>
+          <option value="Santa Cruz">Santa Cruz</option>
+          <option value="Santa Fe">Santa Fe</option>
+          <option value="Santiago del Estero">Santiago del Estero</option>
+          <option value="Tierra del Fuego">Tierra del Fuego</option>
+          <option value="Tucuman">Tucuman</option>
+        </select>
+        <!-- Script by todorotosoft.com -->
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= f.label "Capacidad" %></td>
+      <td><input id="capacity" max="20.0" min="1.0" name="capacity" step="1" type="number" value=1  />
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :url_foto, "Foto" %></td>
+      <td>
+        <%= f.text_field :url_foto , placeholder: 'URL de la foto', :required => true , size: 50 %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :descripcion %></td>
+      <td>
+      <%= f.text_area :descripcion, class: 'form-control', label: 'descripcion', placeholder: 'Ingrese la descripción' , :required => true %>
+        </td>
+    </tr>
+      
+      <td class="col-md-6">
+        <%= f.label "Fecha de inicio de disponibilidad" %>
+          <%= f.date_select :avivable_in_date, :order => [:day, :month, :year], :required => true %>
+        </td>
+        <td class="col-md-6">
+        <%= f.label "Fecha de Fin de disponibilidad" %>
+          <%= f.date_select :avivable_out_date, :order => [:day, :month, :year] , :required => true %>
+        </td>
+      </tr>
+
+    <tr>
+      <td colspan="2" align="center" >
+  		  <%= f.submit "Crear couch", class: 'btn btn-primary' %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+

@@ -1,0 +1,196 @@
+<%= render "home/menu" %>
+
+
+<style type="text/css">
+  p{ 
+	font-size: 17px;
+	margin-left: 15px;
+  }	
+</style>
+	
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;"
+>     
+	<div class="row">
+		<div class="col-md-10">
+			<% if current_user.id == @user.id %>
+				<h2>Mi Perfil</h2>
+			<% else %>
+				<h2><%= @user.first_name+" "+@user.last_name%> Perfil</h2>
+			<% end %>
+		</div>
+		<div class="col-md-2" style="margin-top: 20px">
+		<% if current_user and can? :update, @user %>
+			<%= link_to 'Modificar Datos', edit_user_registration_path, class: 'btn btn-primary' %>
+		<% end %>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+	  	<div class="row">
+	  		<div class="col-md-2" style="margin-top: 35px;">
+	  		<%= image_tag "rails.png", :alt => "Avatar",  size: "120x120" %>
+	  		</div>
+	  		<div class="col-md-10">
+	  		<div class="row">
+	  		<div class="col-md-12" style="margin-top: 20px">
+	  			<p><i>Nombre y Apellido:  </i><b><%= @user.first_name+" "+@user.last_name%></b></p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Tipo de cuenta:</i>
+	  		  <% if @user.has_role? :admin %>
+	  		  	Administrador
+	  		  <% else %>
+	  		  	<% if @user.has_role? :premium %> 
+	  		  		Premium 
+	  		    <% else %> 
+	  		  		Estandar  
+	  		  		<%= link_to 'Ser Premium',"/ser_premium/index" , class: 'btn btn-warning btn-xs' %>
+	  		  	<% end %>
+	  		  <% end %>
+	  		</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12"><p><i>Edad:</i> <%= @user.age %> </p></div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Genero:</i> <%= @user.genre %></p>
+	  		</div>
+	  	</div>
+	</div>
+	</div>
+	</div>
+</div>
+
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px"
+>     
+	<div class="row">
+		<div class="col-md-10">
+			<% if current_user.id == @user.id %>
+				<h2>Mis Couchs</h2>
+			<% else %>
+				<h2><%= @user.first_name+" "+@user.last_name%> Couchs</h2>
+			<% end %>
+		</div>
+		<div class="col-md-2" style="margin-top: 20px">
+		<% if current_user and can? :update, @user %>
+			<%= link_to "Agregar Couch", new_couch_path() , 
+			class: 'btn btn-primary',  action: "new"
+			%>
+		<% end %>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			<table class="table">
+				<tr>
+					<td>Foto</td>
+					<td>Título</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Fecha Entrada</td>
+					<td>Fecha Salida</td>
+					<td>Estado</td>
+					<td>Editar</td>
+					<td>Borrar</td>
+				</tr>
+				<% @user.couchs.each do |couch| %>
+				<tr>
+					<td><%= image_tag couch.url_foto, :alt => "Sin Foto",  height: 'auto', width: '170' %></td>
+					<td><%= link_to couch.titulo, couch %></td>
+					<td><%= couch.descripcion %></td>
+					<td><%= CouchType.find(couch.couch_type_id).titulo %></td>
+					<td><%= couch.avivable_in_date%></td>
+					<td><%= couch.avivable_out_date%></td>
+					<td>
+					<% if couch.enable %>Disponible
+					<% else %>No Disponible<%end%>
+					</td>
+					<% if current_user and can? :update, couch and can? :destroy, couch %>
+						<td>
+						<%= link_to "Editar", edit_couch_path(couch), class: 'btn btn-info btn-sm' %>
+						</td>
+						<td>
+						<%= link_to "Eliminar", couch, method: :delete, class: 'btn btn-danger btn-sm' %>
+						</td>
+					<% else %>
+						<td></td><td></td>
+					<% end %>
+				</tr>
+			    <% end %>
+			</table>
+		</div>
+	</div>
+</div>
+
+<% if current_user.id == @user.id %>
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:40px;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Mis Couchs Reservados</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			<table class="table">
+				<tr>
+					<td>Foto</td>
+					<td>Título</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Fecha Entrada</td>
+					<td>Fecha Salida</td>
+					<td>Estado</td>
+				</tr>
+
+			<% Reservation.where( "user_id = "+ @user.id.to_s  ).all.each do |res| %>
+				<tr>
+					<td><%= image_tag Couch.find(res.couch_id).url_foto, :alt => "FOTITO rota",  size: "120x120" %></td>
+					<td><%=  Couch.find(res.couch_id).titulo %></td>
+					<td><%=  Couch.find(res.couch_id).descripcion %></td>
+					<td><%=  CouchType.find(Couch.find(res.couch_id).couch_type_id).titulo %></td>
+					<td><%=  res.start_date %></td>
+					<td><%=  res.end_date %></td>
+					<td>
+					<%  if res.confirmed %>
+						Reservado
+					<% else %>
+						Pendiente
+					<% end %>
+					</td>
+				</tr>
+			<% end %>
+			</table>
+		</div>
+	</div>
+</div>
+
+<% end %>

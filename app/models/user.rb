@@ -5,8 +5,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  belongs_to :user_calification
 
   has_many :couchs, dependent: :destroy
+  has_many :user_calification, dependent: :destroy
   
   after_create :assign_default_role
 

@@ -16,6 +16,7 @@
 	<tr>
 		<td>
           <select name=ubicacion >
+            <option value="Cualquiera">Cualquier Lugar</option>
             <option value="Buenos Aires">Buenos Aires</option>
             <option value="Buenos Aires Capital">Buenos Aires Capital</option>
             <option value="Catamarca">Catamarca</option>
@@ -44,7 +45,7 @@
           </select>
       </td>
       <td>
-		<%= collection_select :couch, :couch_type_id, CouchType.all, :id, :titulo %>
+		<%= collection_select :couch, :couch_type_id,[CouchType.new(titulo: "Cualquiera" , id: -1)] + CouchType.all, :id, :titulo %>
 	  </td>
 	  <td>
 		<input id="capacity" max="20.0" min="1.0" name="capacity" step="1" type="number" value=1 required/>

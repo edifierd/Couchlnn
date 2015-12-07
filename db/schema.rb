@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206051404) do
+ActiveRecord::Schema.define(version: 20151207054728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comentarios", force: :cascade do |t|
+    t.text     "body"
+    t.boolean  "respondido"
+    t.integer  "couch_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "respuesta"
+  end
 
   create_table "couch_types", force: :cascade do |t|
     t.string   "titulo"
@@ -40,13 +50,13 @@ ActiveRecord::Schema.define(version: 20151206051404) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.boolean  "confirmed"
     t.integer  "user_id"
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "couch_id"
+    t.string   "estado"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -69,24 +79,33 @@ ActiveRecord::Schema.define(version: 20151206051404) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                       default: "", null: false
+    t.string   "encrypted_password",          default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",               default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "genre"
     t.integer  "age"
     t.string   "avatar_img"
     t.string   "secret_question"
+    t.integer  "my_draft_comments_count",     default: 0
+    t.integer  "my_published_comments_count", default: 0
+    t.integer  "my_comments_count",           default: 0
+    t.integer  "draft_comcoms_count",         default: 0
+    t.integer  "published_comcoms_count",     default: 0
+    t.integer  "deleted_comcoms_count",       default: 0
+    t.integer  "spam_comcoms_count",          default: 0
+    t.integer  "pago"
+    t.datetime "fechaPago"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

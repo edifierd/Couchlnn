@@ -1,11 +1,34 @@
 class CouchsController < ApplicationController
   load_and_authorize_resource :only => [:index, :show, :edit, :new]
   def index
-    @couchs = Couch.where( "capacity >= " + params[:capacity]  + " AND location = '"  + params[:ubicacion] +   "' AND couch_type_id =  " + params[:couch][:couch_type_id]  )
+    q = ""
+    ok=false
+    if (params[:capacity] != "Cualquiera")
+      q+= "capacity >= " + params[:capacity] + "  "
+      ok=true
+    end
+    if (params[:ubicacion] != "Cualquiera")
+      if (ok)
+        q+= " AND "
+        ok = false
+      end
+      ok = true
+      q+= "location = '" + params[:ubicacion] + "' "
+    end
+    if (params[:couch][:couch_type_id] != "-1")
+      if (ok)
+        q+= " AND "
+        ok = false
+      end
+      q+= "couch_type_id = " + params[:couch][:couch_type_id] + " "
+    end
+
+    @couchs = Couch.where( q  )
   end
 
   def show
   	@couch = Couch.find(params[:id])
+    @comentarios = Comentario.where(params[:id])
   end
 
   def edit

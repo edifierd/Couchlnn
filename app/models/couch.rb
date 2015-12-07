@@ -1,6 +1,7 @@
 class Couch < ActiveRecord::Base
 	belongs_to :user
 	has_many :reservations
+  has_many :comentarios
 	has_one :CouchType
 	validates_presence_of :titulo, :capacity, :descripcion
 

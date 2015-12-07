@@ -56,8 +56,9 @@ class ReservationController < ApplicationController
 
   def destroy
     @reservation = Reservation.find(params[:id])
-  	@reservation.destroy
-  	redirect_to "/reservation/"
+  	@reservation.estado = "rechazado"
+    @reservation.save
+  	redirect_to (:back)
   end
 
 end

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'acerca_de/index'
   get 'user_calification/index'
+  post 'user_calification/new'
+  get 'user_calification/show'
   get 'couchs/index'
   get 'couch_type/index'
   get 'user/index'
@@ -19,6 +21,7 @@ Rails.application.routes.draw do
   resources :couch_type
   resources :users
   resources :reservation
+  resources :user_calification
   root 'home#index'
 
   

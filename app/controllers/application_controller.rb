@@ -8,20 +8,40 @@ class ApplicationController < ActionController::Base
     render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false
   end
 
-helper_method :cantidadNotificaciones
+helper_method :cantidadNotificaciones, :reservasFinalizadas
 
 def cantidadNotificaciones
 	cant = 0
+	#SOLICITUDES DE RESERVA
 	Reservation.all.each do |res|  
 		if (Couch.find(res.couch_id).user.id == current_user.id) and (res.is_pendiente?)
 			cant = cant + 1
 		end
 	end 
+	#CALIFICACIONES DE USUARIOS PENDIENTES
+	Reservation.where("estado = 'finalizado' ").each do |res|
+		if (Couch.find(res.couch_id).user.id == current_user.id) and (!res.user_calification)
+			cant = cant + 1
+		end
+	end
+	#CALIFICACIONES DE COUCH PENDIENTES
+	Reservation.where("estado = 'finalizado' ").each do |res|
+		if (res.user_id == current_user.id) and (!res.couch_calification)
+			cant = cant + 1
+		end
+	end
+
 	return cant
 end
 
 def reservasFinalizadas
-	
+	Reservation.where("estado <> 'finalizado' ").each do |res|
+		if (res.end_date < Date.today )
+			res.estado = "finalizado"
+			res.save
+		end
+	end
+	return nil
 end
 
 

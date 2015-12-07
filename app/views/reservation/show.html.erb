@@ -8,8 +8,8 @@
 			<%= hidden_field_tag :couch_id, @reservation.couch_id  %>
 			<div class="col-md-6">
 				<%= f.label "Fecha de inicio" %>
-  				<%= f.date_select :start_date, :order => [:day, :month, :year] , prompt: { day: @couch.avivable_in_date.day , month: @couch.avivable_in_date.strftime('%B'), year: @couch.avivable_in_date.year } %>
-          
+  				<%= f.date_select :start_date, :order => [:day, :month, :year]  %>
+          , prompt: { day: @couch.avivable_in_date.day , month: @couch.avivable_in_date.strftime('%B'), year: @couch.avivable_in_date.year }
   			</div>
   			<div class="col-md-6">
 				<%= f.label "Fecha de Fin" %>

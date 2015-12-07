@@ -186,7 +186,42 @@
 
 	<div class="row" style="background-color:#F2F2F2">
 		<div class="col-md-12">
-			
+			<table class="table">
+				<tr>
+					<td>Foto</td>
+					<td>Título</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Fecha Entrada</td>
+					<td>Fecha Salida</td>
+					<td>Estado</td>
+				</tr>
+
+			<% Reservation.where( "user_id = "+ @user.id.to_s).all.each do |res|
+				if (res.is_finalizado?)
+			 %>
+				<tr>
+					<td>
+					<%= link_to Couch.find(res.couch_id) do %>
+                        <% if Couch.find(res.couch_id).user.has_role? :premium %>
+                              <%= image_tag Couch.find(res.couch_id).url_foto, :alt => "Sin Foto",  height: 'auto', width: '120', class: "img-rounded" %>
+                        <% else %>
+                              <%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '120', class: "img-rounded" %>
+                        <% end %>
+                  <% end %>
+
+
+					</td>
+					<td><%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %></td>
+					<td><%=  Couch.find(res.couch_id).descripcion %></td>
+					<td><%=  CouchType.find(Couch.find(res.couch_id).couch_type_id).titulo %></td>
+					<td><%=  res.start_date %></td>
+					<td><%=  res.end_date %></td>
+					<td><%=  res.estado %></td>
+				</tr>
+				<% end %>
+			<% end %>
+			</table>
 		</div>
 	</div>
 </div>
@@ -241,13 +276,9 @@
 					<td><%= link_to couch.titulo, couch %></td>
 					<td><%= couch.descripcion%></td>
 					<td><%= CouchType.find(couch.couch_type_id).titulo %></td>
-<<<<<<< HEAD
 					<td><%= couch.avivable_in_date %></td>
 					<td><%= couch.avivable_out_date %></td>
-=======
-					<td><%= couch.avivable_in_date%></td>
-					<td><%= couch.avivable_out_date%></td>
->>>>>>> f3503fa30ba36b9021d42cde7ec9033273d8c5d7
+
 					<td>
 					<% if couch.enable %>Disponible
 					<% else %>No Disponible<%end%>

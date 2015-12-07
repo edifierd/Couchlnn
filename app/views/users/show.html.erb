@@ -296,7 +296,9 @@
 					<td>Estado</td>
 				</tr>
 
-			<% Reservation.where( "user_id = "+ @user.id.to_s  ).all.each do |res| %>
+			<% Reservation.where( "user_id = "+ @user.id.to_s).all.each do |res|
+				if !(res.is_finalizado?)
+			 %>
 				<tr>
 					<td>
 					<%= link_to Couch.find(res.couch_id) do %>
@@ -314,14 +316,9 @@
 					<td><%=  CouchType.find(Couch.find(res.couch_id).couch_type_id).titulo %></td>
 					<td><%=  res.start_date %></td>
 					<td><%=  res.end_date %></td>
-					<td>
-					<%  if res.confirmed %>
-						Reservado
-					<% else %>
-						Pendiente
-					<% end %>
-					</td>
+					<td><%=  res.estado %></td>
 				</tr>
+				<% end %>
 			<% end %>
 			</table>
 		</div>

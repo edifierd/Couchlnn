@@ -42,7 +42,7 @@ class ReservationController < ApplicationController
     @reservation.end_date = Date.civil(   params[:reservation]["end_date(1i)"].to_i,
                                           params[:reservation]["end_date(2i)"].to_i,
                                           params[:reservation]["end_date(3i)"].to_i)
-    @reservation.confirmed = false
+    @reservation.estado = "pendiente"
     ok = (@couch.is_free?(@reservation.start_date,@reservation.end_date))
     if (ok)
       flash[:success] = "RESERVA ADQUIRIDA"

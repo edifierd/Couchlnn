@@ -75,10 +75,10 @@ class CouchsController < ApplicationController
     pasado_out = ( @couch.avivable_out_date < Date.today )
     
     if(pasado_in)
-      flash[:danger] = "NO SE PUEDE SELECCIONAR DE INICIO UNA FECHA EN EL PASADO!!!!1oNE!"
+      flash[:danger] = "NO SE PUEDE SELECCIONAR DE INICIO UNA FECHA EN EL PASADO!!!"
       redirect_to (:back)
     elsif (pasado_out)
-      flash[:danger] = "NO SE PUEDE SELECCIONAR DE FINALIZACION UNA FECHA EN EL PASADO!!!!1oNE!"
+      flash[:danger] = "NO SE PUEDE SELECCIONAR DE FINALIZACION UNA FECHA EN EL PASADO!!!"
       redirect_to (:back)
     elsif(@couch.save)
       flash[:success] = "ok"

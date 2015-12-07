@@ -1,6 +1,19 @@
 <%= render "home/menu" %>
 
+<style type="text/css">
+  .mensaje{
+
+  }
+</style>
+
 <h1> Crear un couch </h1>
+
+<% if flash[:success]%>
+  <div class="mensaje" style="background-color:green"><%=flash[:success]%></div>
+  <%end%>
+  <% if flash[:danger]%>
+  <div class="mensaje" style="background-color:red"><%=flash[:danger]%></div>
+<%end%>
 
 <%= form_for @couch , url: {action:"create"} do |f| %>
 	<table class="table">

@@ -66,12 +66,12 @@
 	  	</div>
 	  	<div class="row">
 	  		<div class="col-md-12">
-	  		<p><i>Fecha inicio: </i> Hay que editar desp del merge</p>
+	  		<p><i>Fecha inicio: </i><%= @couch.avivable_in_date %></p>
 	  		</div>
 	  	</div>
 	  	<div class="row">
 	  		<div class="col-md-12">
-	  		<p><i>Fecha final: </i> Hay que editar desp del merge</p>
+	  		<p><i>Fecha final: </i><%= @couch.avivable_out_date %></p>
 	  		</div>
 	  	</div>
 	  	<div class="row">
@@ -140,7 +140,7 @@
    </tr>
    <%  
    Reservation.all.each do |res|  
-       if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed) and (res.couch_id == @couch.id)
+       if (Couch.find(res.couch_id).user.id == current_user.id) and (!res.is_pendiente?) (res.couch_id == @couch.id)
    %>
        <tr>
           <td>

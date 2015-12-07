@@ -13,11 +13,11 @@ helper_method :cantidadNotificaciones
 def cantidadNotificaciones
 	cant = 0
 	Reservation.all.each do |res|  
-		if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed)
+		if (Couch.find(res.couch_id).user.id == current_user.id) and (res.is_pendiente?)
 			cant = cant + 1
 		end
 	end 
-	cant
+	return cant
 end
 
 def reservasFinalizadas

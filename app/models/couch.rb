@@ -12,9 +12,9 @@ class Couch < ActiveRecord::Base
 
 	def is_owner?(user)
     	return (user.id==self.user_id)
-  	end
+  end
 
-  	def is_free?(from, to)
+  def is_free?(from, to)
     	reservas_del_couch = self.reservations # reservas del couch (por el has_many)
     	reservas_confirmadas = reservas_del_couch.confirmed # solo miramos las confirmadas
     	reservas_confirmadas.where('? < end_date', from) # from se copiaría en el lugar de '?'

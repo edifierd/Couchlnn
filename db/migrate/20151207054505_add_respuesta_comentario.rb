@@ -3,5 +3,6 @@ class AddRespuestaComentario < ActiveRecord::Migration
   	remove_column :reservations, :respuesta
   	add_column :comentarios, :respuesta, :text
 
+
   end
 end

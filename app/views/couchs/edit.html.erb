@@ -1,8 +1,24 @@
 <%= render "home/menu" %>
 
+<style type="text/css">
+  .mensaje{
+    margin: 25px;
+    width: 650px;
+    height: auto;
+    font-size: 18px;
+    padding: 6px;
+    border-radius: 12px;
+  }
+</style>
+
 <h1> Editar un couch </h1>
 
-
+<% if flash[:success]%>
+  <div class="mensaje" style="background-color:green"><%=flash[:success]%></div>
+  <%end%>
+  <% if flash[:danger]%>
+  <div class="mensaje" style="background-color:red"><%=flash[:danger]%></div>
+<%end%>
 
 <%= form_for @couch , url: {action:"update"} do |f| %>
   <table class="table">

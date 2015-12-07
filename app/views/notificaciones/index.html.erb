@@ -38,7 +38,7 @@
    </tr>
    <%  
    Reservation.all.each do |res|  
-       if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed) 
+       if (Couch.find(res.couch_id).user.id == current_user.id) and (res.is_pendiente?)
    %>
        <tr>
           <td>

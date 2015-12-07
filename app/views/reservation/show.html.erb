@@ -1,18 +1,20 @@
 <%= render "home/menu" %>
 
 <div class="container">
-	<h1> Reservar un Couch </h1>
+	<h1> Reservar couch -> <%= @couch.titulo %>  </h1><br>
 
 	<%= form_for @reservation , url: {action:"create"} do |f| %>
 		<div class="row">
 			<%= hidden_field_tag :couch_id, @reservation.couch_id  %>
 			<div class="col-md-6">
 				<%= f.label "Fecha de inicio" %>
-  				<%= f.date_select :start_date, :order => [:day, :month, :year] %>
+  				<%= f.date_select :start_date, :order => [:day, :month, :year] , prompt: { day: @couch.avivable_in_date.day , month: @couch.avivable_in_date.strftime('%B'), year: @couch.avivable_in_date.year } %>
+          
   			</div>
   			<div class="col-md-6">
 				<%= f.label "Fecha de Fin" %>
   				<%= f.date_select :end_date, :order => [:day, :month, :year] %>
+          ,prompt: { day: @couch.avivable_out_date.day , month: @couch.avivable_out_date.strftime('%B'), year: @couch.avivable_out_date.year } 
   			</div>
   		</div>
   		<%= f.submit "Reservar couch", class: 'btn btn-primary' %>

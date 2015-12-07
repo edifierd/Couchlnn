@@ -1,7 +1,26 @@
 <%= render "home/menu" %>
 
+<style type="text/css">
+  .mensaje{
+    margin: 25px;
+    width: 650px;
+    height: auto;
+    font-size: 18px;
+    padding: 6px;
+    border-radius: 12px;
+  }
+</style> 
+
+
 <div class="container">
-	<h1> Reservar un Couch </h1>
+	<h1> Reservar couch <%= Couchs.find(@reservation.couch_id).titulo %> </h1>
+
+  <% if flash[:success]%>
+  <div class="mensaje" style="background-color:green"><%=flash[:success]%></div>
+  <%end%>
+  <% if flash[:danger]%>
+  <div class="mensaje" style="background-color:red"><%=flash[:danger]%></div>
+  <%end%>
 
 	<%= form_for @reservation , url: {action:"create"} do |f| %>
 		<div class="row">

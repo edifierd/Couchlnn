@@ -62,8 +62,8 @@ class CouchsController < ApplicationController
       flash[:danger] = "NO SE PUEDE SELECCIONAR DE FINALIZACION UNA FECHA EN EL PASADO!!!"
       redirect_to (:back)
     elsif(@couch.save)
-      flash[:success] = "ok"
-      redirect_to "/"
+      flash[:success] = "Se modifico con exito el couch"
+      redirect_to (:back)
     else
       render 'new'
     end
@@ -104,8 +104,8 @@ class CouchsController < ApplicationController
       flash[:danger] = "NO SE PUEDE SELECCIONAR DE FINALIZACION UNA FECHA EN EL PASADO!!!"
       redirect_to (:back)
     elsif(@couch.save)
-      flash[:success] = "ok"
-      redirect_to "/"
+      flash[:success] = "Se creo con exito el couch"
+      redirect_to (:back)
     else
       render 'new'
     end

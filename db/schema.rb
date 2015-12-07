@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20151206051404) do
   end
 
   create_table "reservations", force: :cascade do |t|
+    t.boolean  "confirmed"
     t.integer  "user_id"
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "couch_id"
-    t.string   "estado"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -87,8 +87,6 @@ ActiveRecord::Schema.define(version: 20151206051404) do
     t.integer  "age"
     t.string   "avatar_img"
     t.string   "secret_question"
-    t.integer  "pago"
-    t.datetime "fechaPago"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

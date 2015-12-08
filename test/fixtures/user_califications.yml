@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  puntaje: 1
+  fecha: 2015-12-05 20:05:04
+  comentario: MyString
+
+two:
+  puntaje: 1
+  fecha: 2015-12-05 20:05:04
+  comentario: MyString

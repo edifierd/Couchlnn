@@ -1,0 +1,9 @@
+<%= render "home/menu" %>
+
+<p align="center" style="margin-top: 50px; margin-bottom: 80px;"><b>Gracias <%= @nombre %> por aportar el pago de $<%= @pago %> a la cuenta <%= current_user.email %> al dia <%= @fecha.strftime("%m/%d/%Y") %>. Su aporte nos ayuda a brindarle un mejor servicio en cada actualización. Usted ahora es Premium y puede acceder a todos los beneficios que tenemos para usted !</b>
+
+<br><br>
+<%= link_to 'Volver al inicio', "/", class: "btn btn-success" %> 
+
+<p>
+

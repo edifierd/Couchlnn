@@ -1,0 +1,91 @@
+<%= render "home/menu" %>
+
+
+<style type="text/css">
+  p{ 
+  font-size: 17px;
+  margin-left: 15px;
+  } 
+</style>
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:22px;"
+>
+  
+<%= form_for Reservation.new , url: {action:"buscar"} do |f| %>
+  <div class="row" style="padding: 10px;">
+    <div class="col-md-5">
+      <%= f.label "Fecha de inicio" %>
+      <%= f.date_select :start_date, :order => [:day, :month, :year] %>
+    </div>
+    <div class="col-md-5">
+      <%= f.label "Fecha de Fin" %>
+      <%= f.date_select :end_date, :order => [:day, :month, :year] %>
+    </div>
+    <div class="col-md-2">
+      <%= f.submit "Buscar", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
+
+</div>
+
+<!-- Reservas realizdas -->
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:40px;"
+>     
+  <div class="row">
+    <div class="col-md-12"><h2>Reservas concretadas</h2></div>
+  </div>
+
+  <div class="row" style="background-color:#F2F2F2">
+    <div class="col-md-12">
+      <table class="table">
+   <tr>
+       <td>Usuario</td>
+       <td>Fecha Reserva</td>
+       <td>Fecha Inicio de reserva</td>
+       <td>Fecha Final  de reserva</td>
+       <td>Couch</td>
+
+   </tr>
+   <%  
+    @reservations.each do |res|  
+   %>
+       <tr>
+          <td>
+             <%= res.user.first_name %>
+          </td>
+          <td>
+        <%= res.reservation_date %>
+          </td>
+          <td>
+        <%= res.start_date %>
+          </td>
+          <td>
+        <%= res.end_date %>
+          </td>
+          <td>
+        <%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %>
+          </td>
+       </tr> 
+   <%  end %>
+</table>
+    </div>
+  </div>
+</div>

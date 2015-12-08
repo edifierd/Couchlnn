@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Couchinn</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag :defaults %>
+</head>
+
+<body>
+	
+
+<%= yield %>
+
+
+<% reservasFinalizadas %>
+
+
+
+</body>
+
+
+<footer>
+  <div class="container" align="center" style="margin-top: 15px; margin-bottom:25px;">
+    <b><%= link_to "Acerca de", "/acerca_de/index" %> - Copyright CouchInn Group 6 (2015) </b>
+    	<br>
+    	Created by <%= image_tag "logo.jpg" , style:"width: 10%"  %>
+  </div>
+</footer>
+
+</html>
+

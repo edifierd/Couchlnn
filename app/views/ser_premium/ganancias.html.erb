@@ -1,0 +1,39 @@
+<%= render "home/menu" %>
+
+<style type="text/css">
+  p{ 
+  font-size: 17px;
+  margin-left: 15px;
+  } 
+</style>
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:22px;"
+>
+  
+<%= form_for Reservation.new , url: {action:"buscar"} do |f| %>
+  <div class="row" style="padding: 10px;">
+    <div class="col-md-5">
+      <%= f.label "Fecha de inicio" %>
+      <%= f.date_select :start_date, :order => [:day, :month, :year] %>
+    </div>
+    <div class="col-md-5">
+      <%= f.label "Fecha de Fin" %>
+      <%= f.date_select :end_date, :order => [:day, :month, :year] %>
+    </div>
+    <div class="col-md-2">
+      <%= f.submit "Buscar", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
+
+</div> 
+
+

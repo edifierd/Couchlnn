@@ -1,0 +1,82 @@
+<%= render "home/menu" %>
+
+<style type="text/css">
+  p{ 
+  font-size: 17px;
+  margin-left: 15px;
+  } 
+</style>
+
+<h2>Registrarse</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <table class="table">
+    <tr>
+      <td><%= f.label :Nombre %></td>
+      <td><%= f.text_field :first_name, autofocus: true %></td>
+    </tr>  
+
+    <tr>
+      <td><%= f.label :Apellido %></td>
+      <td><%= f.text_field :last_name, autofocus: true %></td>
+    </tr> 
+
+    <tr>
+      <td><%= f.label :genre, "Genero" %></td>
+      <td><%= f.select :genre, ['Masculino', 'Femenino'] %></td>
+    </tr> 
+
+    <tr>
+      <td><%= f.label :age, "Edad" %></td>
+      <td><%= f.number_field :age, value: 18 %></td>
+    </tr>   
+
+    <tr>
+      <td><%= f.label :Correo %></td>
+      <td><%= f.email_field :email, autofocus: true %></td>
+    </tr>   
+
+    <tr>
+      <td colspan="2">
+        <%= f.label :Contraseña %>
+        <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> caracteres minimos)</em>
+        <% end %>
+        <br>
+        <%= f.password_field :password, autocomplete: "off" %>
+      </td>
+    </tr>  
+
+    <tr>
+      <td colspan="2">
+        <%= f.label :Confimación_contraseña %><br>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </td>
+    </tr> 
+
+    <tr>
+      <td colspan="2">
+      <%= f.label :secret_question, "Pregunta secreta: ¿Cuál es tu color favorito?" %>
+      <%= f.text_field :secret_question, autofocus: true %> 
+      <br>
+      <em>(Sera necesaria en caso que olvide su contraseña)</em>
+      </td>
+    </tr>  
+
+    <tr>
+      <td colspan="2" align="center">
+        <br>
+        <%= f.submit "Registrarse", class: 'btn btn-info btn-sm' %>
+      </td>
+    </tr> 
+
+
+  </table>
+
+<% end %>
+
+<br>
+
+<%= render "devise/shared/links" %>

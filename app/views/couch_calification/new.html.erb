@@ -1,0 +1,28 @@
+<%= render "home/menu" %>
+
+
+<%= form_for @couch_calification , url: {action:"create"} do |f| %>
+	<table class="table">
+		<tr>
+			<th>Puntaje</th>
+			<td></td>
+		</tr>
+		<tr>
+			<td>
+			<select name="puntaje">
+          		<option value="1">1</option>
+          		<option value="2">2</option>
+          		<option value="3">3</option>
+          		<option value="4">4</option>
+          		<option value="5">5</option>
+          	</select>
+			</td>
+			<td>
+			<%= hidden_field_tag "couch_id", @couch_id %>
+          	<%= hidden_field_tag "user_id", @user_id %>
+          	<%= hidden_field_tag "reservation_id", @reservation_id %>
+			<%= f.submit "Calificar", class: 'btn btn-primary' %>
+			</td>
+		</tr>
+	</table>
+<% end %>

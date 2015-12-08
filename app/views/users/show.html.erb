@@ -1,0 +1,433 @@
+<%= render "home/menu" %>
+
+<script type="text/javascript">
+	function muestra_oculta(contenido){
+		document.getElementById("calificaciones").style.display = "none";
+		document.getElementById("usuariosCalificados").style.display = "none";
+		document.getElementById("couchsCalificados").style.display = "none";
+		document.getElementById("couchs").style.display = "none";
+		document.getElementById("couchVisitados").style.display = "none";
+		<% if current_user.id == @user.id %>
+		document.getElementById("reservas").style.display = "none";
+		<% end %>
+		document.getElementById(contenido).style.display = "block";
+
+	}
+</script>
+
+<style type="text/css">
+  p{ 
+	font-size: 17px;
+	margin-left: 15px;
+  }	
+</style>
+	
+
+<!-- DATOS DE USUARIO -->
+
+<div class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	"
+>     
+	<div class="row">
+		<div class="col-md-8">
+			<% if current_user.id == @user.id %>
+				<h2>Mi Perfil</h2>
+			<% else %>
+				<h2><%= @user.first_name+" "+@user.last_name%> Perfil</h2>
+			<% end %>
+		</div>
+		<div class="col-md-2" style="margin-top: 20px">
+		<% if current_user and can? :update, @user %>
+			<%= link_to "Agregar Couch", new_couch_path() , 
+			class: 'btn btn-primary',  action: "new"
+			%>
+		<% end %>
+		</div>
+		<div class="col-md-2" style="margin-top: 20px">
+		<% if current_user and can? :update, @user %>
+			<%= link_to 'Modificar Datos', edit_user_registration_path, class: 'btn btn-primary' %>
+		<% end %>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+	  	<div class="row">
+	  		<div class="col-md-2" style="margin-top: 35px;">
+	  		<%= image_tag "rails.png", :alt => "Avatar",  size: "120x120" %>
+	  		</div>
+	  		<div class="col-md-10">
+	  		<div class="row">
+	  		<div class="col-md-12" style="margin-top: 20px">
+	  			<p><i>Nombre y Apellido:  </i><b><%= @user.first_name+" "+@user.last_name%></b></p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Tipo de cuenta:</i>
+	  		  <% if @user.has_role? :admin %>
+	  		  	Administrador
+	  		  <% else %>
+	  		  	<% if @user.has_role? :premium %> 
+	  		  		Premium 
+	  		    <% else %> 
+	  		  		Estandar  
+	  		  		<%= link_to 'Ser Premium',"/ser_premium/index" , class: 'btn btn-warning btn-xs' %>
+	  		  	<% end %>
+	  		  <% end %>
+	  		</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12"><p><i>Edad:</i> <%= @user.age %> </p></div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  		<p><i>Genero:</i> <%= @user.genre %></p>
+	  		</div>
+	  	</div>
+	</div>
+	</div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2; margin-top:15px; margin-bottom:15px; padding-top: 7px; padding-bottom: 7px;">
+		<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm" onclick="muestra_oculta('calificaciones')" >Calificación
+	  		</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('usuariosCalificados')" >Usuarios Calificados</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('couchsCalificados')" >Couchs Calificados</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm" onclick="muestra_oculta('couchs')">
+	  		Couchs</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('couchVisitados')" >Couchs Visitados</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<% if current_user.id == @user.id %>
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('reservas')" >Mis Reservas</a>
+	  		<% end %>
+	  	</div>
+	</div>
+</div>
+
+<!-- CALIFICACIONES DEL USUARIO ACTUAL -->
+
+<div id="calificaciones" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:20px;
+	display:block;"
+>     
+	<div class="row">
+		<div class="col-md-6"><h2>Calificación</h2></div>
+		<div class="col-md-6">
+			<h2>
+			Calificación Promedio: <%= @user.calificacionPromedio %>
+			</h2>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+		<table class="table">
+		  <tr>
+			<th>Puntaje</th>
+			<th>Usuario</th>
+		  </tr>
+		  <% @user.user_califications.each do |c| %>
+		  <tr>
+		    <td><%= c.puntaje %></td>
+		    <td><%=link_to User.find(c.user_id_propietario).first_name, User.find(c.user_id_propietario) %></td>
+		  </tr>
+		  <% end %>	
+		</table>
+		</div>
+	</div>
+</div>
+
+
+<!-- CALIFICACIONES DADAS A OTROS USUARIOS -->
+
+<div id="usuariosCalificados" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:20px;
+	display:none;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Usuarios Calificados</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+		<table class="table">
+		  <tr>
+			<th>Puntaje</th>
+			<th>Usuario</th>
+		  </tr>
+		  <% UserCalification.where("user_id_propietario ="+@user.id.to_s).each do |c| %>
+		  <tr>
+		    <td><%= c.puntaje %></td>
+		    <td><%=link_to c.user.first_name, c.user %></td>
+		  </tr>
+		  <% end %>	
+		</table>
+			
+		</div>
+	</div>
+</div>
+
+<!-- CALIFICACIONES DADAS A COUCHS -->
+
+<div id="couchsCalificados" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:20px;
+	display:none;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Couchs Calificados</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+	    <table class="table">
+		  <tr>
+			<th>Puntaje</th>
+			<th>Fecha</th>
+			<th>Couch</th>
+		  </tr>
+		  <% CouchCalification.where("user_id ="+@user.id.to_s).each do |c| %>
+		  <tr>
+		    <td><%= c.puntaje %></td>
+		    <td><%= c.fecha %></td>
+		    <td><%=link_to Couch.find(c.couch_id).titulo, Couch.find(c.couch_id) %></td>
+		  </tr>
+		  <% end %>	
+		</table>
+		</div>
+	</div>
+</div>
+
+
+<!-- COUCHS QUE VISITO EL USUARIO -->
+
+<div id="couchVisitados" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:20px;
+	display:none;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Couchs Visitados</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			<table class="table">
+				<tr>
+					<td>Foto</td>
+					<td>Título</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Fecha Entrada</td>
+					<td>Fecha Salida</td>
+					<td>Estado</td>
+				</tr>
+
+			<% Reservation.where( "user_id = "+ @user.id.to_s).all.each do |res|
+				if (res.is_finalizado?)
+			 %>
+				<tr>
+					<td>
+					<%= link_to Couch.find(res.couch_id) do %>
+                        <% if Couch.find(res.couch_id).user.has_role? :premium %>
+                              <%= image_tag Couch.find(res.couch_id).url_foto, :alt => "Sin Foto",  height: 'auto', width: '120', class: "img-rounded" %>
+                        <% else %>
+                              <%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '120', class: "img-rounded" %>
+                        <% end %>
+                  <% end %>
+
+
+					</td>
+					<td><%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %></td>
+					<td><%=  Couch.find(res.couch_id).descripcion %></td>
+					<td><%=  CouchType.find(Couch.find(res.couch_id).couch_type_id).titulo %></td>
+					<td><%=  res.start_date %></td>
+					<td><%=  res.end_date %></td>
+					<td><%=  res.estado %></td>
+				</tr>
+				<% end %>
+			<% end %>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!-- LISTA DE COUCH DEL USUARIO -->
+
+<div id="couchs" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	display:none;"
+>     
+	<div class="row">
+		<div class="col-md-12">
+			<% if current_user.id == @user.id %>
+				<h2>Mis Couchs</h2>
+			<% else %>
+				<h2><%= @user.first_name+" "+@user.last_name%> Couchs</h2>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			<table class="table">
+				<tr>
+					<td>Foto</td>
+					<td>Título</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Fecha Entrada</td>
+					<td>Fecha Salida</td>
+					<td>Estado</td>
+					<td>Editar</td>
+					<td>Borrar</td>
+				</tr>
+				<% @user.couchs.each do |couch| %>
+				<tr>
+					<td> 
+					<%= link_to couch do %>
+						<% if couch.user.has_role? :premium %>
+							<%= image_tag couch.url_foto, :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+						<% else %>
+							<%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+						<% end %>
+					<% end %>
+					</td>
+					<td><%= link_to couch.titulo, couch %></td>
+					<td><%= couch.descripcion%></td>
+					<td><%= CouchType.find(couch.couch_type_id).titulo %></td>
+					<td><%= couch.avivable_in_date %></td>
+					<td><%= couch.avivable_out_date %></td>
+
+					<td>
+					<% if couch.enable %>Disponible
+					<% else %>No Disponible<%end%>
+					</td>
+					<% if current_user and can? :update, couch and can? :destroy, couch %>
+						<td>
+						<%= link_to "Editar", edit_couch_path(couch), class: 'btn btn-info btn-sm' %>
+						</td>
+						<td>
+						<%= link_to "Eliminar", couch, method: :delete, class: 'btn btn-danger btn-sm' %>
+						</td>
+					<% else %>
+						<td></td><td></td>
+					<% end %>
+				</tr>
+			    <% end %>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<!-- RESERVAS PENDIENTES O REALIZADAS -->
+
+<% if current_user.id == @user.id %>
+<div id="reservas" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:40px;
+	display:none;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Mis Couchs Reservados</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+			<table class="table">
+				<tr>
+					<td>Foto</td>
+					<td>Título</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Fecha Entrada</td>
+					<td>Fecha Salida</td>
+					<td>Estado</td>
+				</tr>
+
+			<% Reservation.where( "user_id = "+ @user.id.to_s).all.each do |res|
+				if !(res.is_finalizado?)
+			 %>
+				<tr>
+					<td>
+					<%= link_to Couch.find(res.couch_id) do %>
+                        <% if Couch.find(res.couch_id).user.has_role? :premium %>
+                              <%= image_tag Couch.find(res.couch_id).url_foto, :alt => "Sin Foto",  height: 'auto', width: '120', class: "img-rounded" %>
+                        <% else %>
+                              <%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '120', class: "img-rounded" %>
+                        <% end %>
+                  <% end %>
+
+
+					</td>
+					<td><%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %></td>
+					<td><%=  Couch.find(res.couch_id).descripcion %></td>
+					<td><%=  CouchType.find(Couch.find(res.couch_id).couch_type_id).titulo %></td>
+					<td><%=  res.start_date %></td>
+					<td><%=  res.end_date %></td>
+					<td><%=  res.estado %></td>
+				</tr>
+				<% end %>
+			<% end %>
+			</table>
+		</div>
+	</div>
+</div>
+
+<% end %>

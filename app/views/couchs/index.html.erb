@@ -1,0 +1,40 @@
+<%= render "home/menu" %>
+
+<table class="table">
+	<tr>
+    	<td colspan="2"><h3> Listado de Couchs </h3></td>
+      <td colspan="1"> 
+      <% if current_user and can? :create, Couch %>
+                  <%= link_to "Agregar", new_couch_path() , class: 'btn btn-success btn-sm',  action: "new"%>
+            <% end %>
+      </td>
+      <td colspan="2"></td>
+	<tr>
+		<th> Foto </th>
+		<th> Calificación </th>
+		<th> Título </th>
+		<th> Descripción </th>
+		<th> User </th>
+	</tr>
+
+	
+	<% @couchs.each do |couch| %>
+		<tr>
+			<td> 
+			<%= link_to couch do %>
+                <% if couch.user.has_role? :premium %>
+                    <%= image_tag couch.url_foto, :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+                <% else %>
+                    <%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+                <% end %>
+            <% end %>
+			</td>
+			<td> <% if couch.calificacionPromedio > 0 %><%= couch.calificacionPromedio %><% else %>Sin calificar<% end %></td>
+			<td> <%= link_to couch.titulo, couch %> </td>
+			<td> <%= couch.descripcion %> </td>
+			<td> <%= link_to User.find(couch.user_id).first_name, User.find(couch.user_id) %> </td>
+		</tr>
+	<% end %>
+
+
+</table>

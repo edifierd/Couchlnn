@@ -5,7 +5,7 @@ class ReservationController < ApplicationController
     @reservation = Reservation.all
   end
 
-  def show
+  def buscar
     @reservations=Reservation.new
     start_date = Date.civil(              params[:reservation]["start_date(1i)"].to_i,
                                           params[:reservation]["start_date(2i)"].to_i,
@@ -14,7 +14,15 @@ class ReservationController < ApplicationController
     end_date = Date.civil(                params[:reservation]["end_date(1i)"].to_i,
                                           params[:reservation]["end_date(2i)"].to_i,
                                           params[:reservation]["end_date(3i)"].to_i)
-    @reservations=@reservations.is_range(start_date,end_date)
+   @reservations=@reservations.is_range(start_date,end_date)
+
+  end
+
+  def show
+    @couch = Couch.find(params[:id])
+    @reservation = @couch.reservations.new
+    @reservation.couch_id=params[:id]
+   
   end
 
   def edit

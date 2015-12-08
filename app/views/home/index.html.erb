@@ -63,7 +63,7 @@
 	  <td>
 	  	<button type="submit" title="Buscar">
 	  		<img src="/assets/search.png" alt="Buscar" />
-		</button>
+		  </button>
 	  </td>
     </tr>
 
@@ -84,6 +84,7 @@
       <td colspan="2"></td>
       <tr>
             <th> Foto </th>
+            <th> Calificación </th>
             <th> Título </th>
             <th> Descripción </th>
             <th> Propietario </th>
@@ -101,6 +102,7 @@
                         <% end %>
                   <% end %>
                   </td>
+                  <td> <% if couch.calificacionPromedio > 0 %><%= couch.calificacionPromedio %><% else %>Sin calificar<% end %></td>
                   <td> <%= link_to couch.titulo, couch %> </td>
                   <td> <%= couch.descripcion %> </td>
                   <td> <%= link_to User.find(couch.user_id).first_name, User.find(couch.user_id) %> </td>

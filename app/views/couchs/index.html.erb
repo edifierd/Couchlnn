@@ -11,29 +11,28 @@
       <td colspan="2"></td>
 	<tr>
 		<th> Foto </th>
+		<th> Calificación </th>
 		<th> Título </th>
 		<th> Descripción </th>
 		<th> User </th>
-		<th> Opciones </th>
 	</tr>
 
 	
 	<% @couchs.each do |couch| %>
 		<tr>
 			<td> 
-			<% if couch.user.has_role? :premium %> 
-				<%= image_tag couch.url_foto , :alt => "Sin Foto",  height: 'auto', width: '170' %> 
-			<% end %>
+			<%= link_to couch do %>
+                <% if couch.user.has_role? :premium %>
+                    <%= image_tag couch.url_foto, :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+                <% else %>
+                    <%= image_tag "http://www.libreriasigal.com/images/sin_foto.png", :alt => "Sin Foto",  height: 'auto', width: '170', class: "img-rounded" %>
+                <% end %>
+            <% end %>
 			</td>
+			<td> <% if couch.calificacionPromedio > 0 %><%= couch.calificacionPromedio %><% else %>Sin calificar<% end %></td>
 			<td> <%= link_to couch.titulo, couch %> </td>
 			<td> <%= couch.descripcion %> </td>
 			<td> <%= link_to User.find(couch.user_id).first_name, User.find(couch.user_id) %> </td>
-			<td>
-			<% if current_user and can? :update, couch and can? :destroy, couch %>
-				<%= link_to "Editar", edit_couch_path(couch), class: 'btn btn-info btn-sm' %>
-				<%= link_to "Eliminar", couch, method: :delete, class: 'btn btn-danger btn-sm' %>
-			<% end %>
-			</td>
 		</tr>
 	<% end %>
 

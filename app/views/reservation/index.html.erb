@@ -16,41 +16,19 @@
   margin-right:30px; 
   margin-left:30px;
   margin-top: 15px;
-  margin-bottom:22px;"
->
-  
-  <%= form_for Reservation.new , url: {action:"show"} do |f| %>
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.label "Fecha de inicio" %>
-          <%= f.date_select :start_date, :order => [:day, :month, :year] %>
-        </div>
-        <div class="col-md-6">
-        <%= f.label "Fecha de Fin" %>
-          <%= f.date_select :end_date, :order => [:day, :month, :year] %>
-        </div>
-      </div>
-      <%= f.submit "Buscar", class: 'btn btn-primary' %>
-    </div>
-<% end %>
-
-</div>
-
-<div class="row" style="
-  padding: 50px; 
-  padding-top: 5px;
-  padding-bottom: 5px;
-  background-color: #D8D8D8; 
-  margin-right:30px; 
-  margin-left:30px;
-  margin-top: 15px;
   margin-bottom:100px;"
 >   
 
-  
 
   <div class="row">
-    <div class="col-md-12"><h2>Solicitudes pendientes de reserva</h2></div>
+    <div class="col-md-10"><h2>Reservas totales</h2></div>
+    <div class="col-md-2">
+      <%= form_for Reservation.new , url: {action:"buscar"} do |f| %>
+          <%= f.date_select :start_date, { :discard_day => true, :discard_month => true, :discard_year => true }  %>
+          <%= f.date_select :end_date, { :discard_day => true, :discard_month => true, :discard_year => true }  %>
+          <%= f.submit "Buscar", class: 'btn btn-primary', style:"margin-top:15px;" %>
+      <% end %>
+    </div>
   </div>
 
   <div class="row" style="background-color:#F2F2F2">
@@ -61,9 +39,9 @@
        <td>Fecha Inicio</td>
        <td>Fecha Final</td>
        <td>Couch</td>
-       <td></td>
-       <td></td>
-   </tr>
+       <td>Estado</td>
+
+    </tr>
 
    
 
@@ -83,11 +61,8 @@
           <td>
         <%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %>
           </td>
-          <td>
-        <%= link_to "Aceptar",  edit_reservation_path(res) , class: 'btn btn-success btn-sm' %>
-          </td>
-          <td>
-        <%= link_to "Rechazar", res, method: :delete, class: 'btn btn-danger btn-sm' %>
+           <td>
+        <%= res.estado %>
           </td>
        </tr> 
    <% end %>

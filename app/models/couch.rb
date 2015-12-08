@@ -33,4 +33,18 @@ class Couch < ActiveRecord::Base
     end
   end
 
+   def calificacionPromedio
+    total = 0
+    cant_calificaciones = self.couch_calification.count
+    if cant_calificaciones > 0 
+      self.couch_calification.each do |c|
+        total = total + c.puntaje
+      end
+      rta = (total / cant_calificaciones)
+    else
+      rta = total 
+    end
+    return rta
+  end
+
 end

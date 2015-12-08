@@ -99,12 +99,28 @@
 	margin-bottom:20px;"
 >     
 	<div class="row">
-		<div class="col-md-12"><h2>Calificación</h2></div>
+		<div class="col-md-6"><h2>Calificación</h2></div>
+		<div class="col-md-6">
+			<h2>
+			Calificación Promedio: <%= @couch.calificacionPromedio %>
+			</h2>
+		</div>
 	</div>
 
 	<div class="row" style="background-color:#F2F2F2">
 		<div class="col-md-12">
-			
+		<table class="table">
+		  <tr>
+			<th>Puntaje</th>
+			<th>Usuario</th>
+		  </tr>
+		  <% @couch.couch_calification.each do |c| %>
+		  <tr>
+		    <td><%= c.puntaje %></td>
+		    <td><%=link_to User.find(c.user_id).first_name, User.find(c.user_id) %></td>
+		  </tr>
+		  <% end %>	
+		</table>
 		</div>
 	</div>
 </div>

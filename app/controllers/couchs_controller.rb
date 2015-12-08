@@ -30,8 +30,8 @@ class CouchsController < ApplicationController
                                           params[:couch]["avivable_out_date(2i)"].to_i,
                                           params[:couch]["avivable_out_date(3i)"].to_i)
    
-    q+= " AND '" + avivable_in_date.strftime("%d/%m/%Y") + "' >= avivable_in_date AND '"
-    q+= avivable_out_date.strftime("%d/%m/%Y") + "' <= avivable_out_date "
+    q+= " AND '" + avivable_in_date.strftime("%d/%m/%Y") + "' <= avivable_in_date AND '"
+    q+= avivable_out_date.strftime("%d/%m/%Y") + "' >= avivable_out_date "
 
 
 

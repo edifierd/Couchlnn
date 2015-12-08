@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post 'reservation/show'
   get 'comentario/new'
   get 'comentario/edit'
+  post 'reservation/buscar'
   resources :couchs
   resources :couch_type
   resources :users

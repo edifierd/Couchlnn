@@ -11,20 +11,33 @@
   }
 </style> 
 
+
+<% if flash[:success]%>
+  <div class="mensaje" style="background-color:green"><%=flash[:success]%></div>
+  <%end%>
+  <% if flash[:danger]%>
+  <div class="mensaje" style="background-color:red"><%=flash[:danger]%></div>
+<%end%>
+
 <div class="container">
-  <%= form_for Reservation.new , url: {action:"show"} do |f| %>
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.label "Fecha de inicio" %>
-          <%= f.date_select :start_date, :order => [:day, :month, :year] %>
-        </div>
-        <div class="col-md-6">
-        <%= f.label "Fecha de Fin" %>
-          <%= f.date_select :end_date, :order => [:day, :month, :year] %>
-        </div>
-      </div>
-      <%= f.submit "Buscar", class: 'btn btn-primary' %>
-    </div>
+
+
+  <h1> Reservar couch -> <%= @couch.titulo %>  </h1><br>
+
+	<%= form_for @reservation , url: {action:"create"} do |f| %>
+		<div class="row">
+			<%= hidden_field_tag :couch_id, @reservation.couch_id  %>
+			<div class="col-md-6">
+				<%= f.label "Fecha de inicio" %>
+  				<%= f.date_select :start_date, :order => [:day, :month, :year]  %>
+  			</div>
+  			<div class="col-md-6">
+				<%= f.label "Fecha de Fin" %>
+  				<%= f.date_select :end_date, :order => [:day, :month, :year] %>
+  			</div>
+  		</div>
+  		<%= f.submit "Reservar couch", class: 'btn btn-primary' %>
+  	</div>
 <% end %>
 
 
@@ -55,7 +68,7 @@
 
    </tr>
    <%  
-    @reservations.each do |res|  
+    Reservation.all.each do |res|  
        if (res.is_reservado?)
    %>
        <tr>

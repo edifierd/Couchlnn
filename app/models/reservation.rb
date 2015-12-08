@@ -15,9 +15,9 @@ class Reservation < ActiveRecord::Base
 	def is_range(from, to)
 		reservas_ok=[]
     	reservas = Reservation.all                                        
-    	reservas_ok = reservas.where( "estado = 'reservado'") # solo miramos las reservas confirmadas            
-    	reservas_ok = reservas_ok.where('? < end_date', from) # from se copiaría en el lugar de '?'
-    	reservas_ok = reservas_ok.where('? > start_date', to) # to se copiaría en el lugar de '?'
+    	reservas_ok = reservas.where( "estado = 'reservado' OR estado = 'finalizado'") # solo miramos las reservas confirmadas            
+    	reservas_ok = reservas_ok.where('? >= end_date', to) # from se copiaría en el lugar de '?'
+    	reservas_ok = reservas_ok.where('? <= start_date', from) # to se copiaría en el lugar de '?'
     
     # Retorno true o false si el resultado de lo anterior 
     # está vacío o no

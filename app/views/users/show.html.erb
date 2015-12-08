@@ -137,7 +137,9 @@
 
 	<div class="row" style="background-color:#F2F2F2">
 		<div class="col-md-12">
-			
+		<% @user.user_califications.each do |c| %>
+			<%= c.puntaje %>
+		<% end %>	
 		</div>
 	</div>
 </div>

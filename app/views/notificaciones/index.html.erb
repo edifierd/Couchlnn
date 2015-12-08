@@ -105,6 +105,7 @@
         <%= form_for  UserCalification.new , url: {:action=>"new", :controller=>"user_calification" }  do |e| %>
           <%= hidden_field_tag "user_id_propietario", Couch.find(res.couch_id).user.id %>
           <%= hidden_field_tag "user_id", res.user.id %>
+          <%= hidden_field_tag "reservation_id", res.id %>
           <%= e.submit "Calificar", class: 'btn btn-primary' %>
         <% end %>
         </td>

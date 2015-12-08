@@ -1,6 +1,5 @@
 <%= render "home/menu" %>
 
-<%= @user.first_name %>
 
 
 <%= form_for @user_calification , url: {action:"create"} do |f| %>
@@ -15,6 +14,7 @@
 			<select name="puntaje">
           		<option value="1">1</option>
           		<option value="2">2</option>
+
           		<option value="3">3</option>
           		<option value="4">4</option>
           		<option value="5">5</option>
@@ -24,7 +24,10 @@
 			<%= f.text_field :comentario, placeholder: 'Ingrese un comentario' , :required => true , size: 50 %>
 			</td>
 			<td>
-				<%= f.submit "Calificar", class: 'btn btn-primary' %>
+			<%= hidden_field_tag "user_id_propietario", @user_id_propietario %>
+          	<%= hidden_field_tag "user_id", @user_id %>
+          	<%= hidden_field_tag "reservation_id", @reservation_id %>
+			<%= f.submit "Calificar", class: 'btn btn-primary' %>
 			</td>
 		</tr>
 	</table>

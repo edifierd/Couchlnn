@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207170619) do
+ActiveRecord::Schema.define(version: 20151207230338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,8 +76,10 @@ ActiveRecord::Schema.define(version: 20151207170619) do
     t.integer  "puntaje"
     t.datetime "fecha"
     t.string   "comentario"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "user_id"
+    t.integer  "user_id_propietario"
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,6 +110,7 @@ ActiveRecord::Schema.define(version: 20151207170619) do
     t.integer  "spam_comcoms_count",          default: 0
     t.integer  "pago"
     t.datetime "fechaPago"
+    t.integer  "user_calification_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :couchs, dependent: :destroy
 
-  has_many :couchs, dependent: :destroy
-  has_many :user_calification, dependent: :destroy
+  has_many :user_califications, dependent: :destroy
   belongs_to :user_calification
   
   after_create :assign_default_role

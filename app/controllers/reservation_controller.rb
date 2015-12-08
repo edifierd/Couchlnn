@@ -14,7 +14,7 @@ class ReservationController < ApplicationController
   def edit
     @reservation = Reservation.find(params[:id])
     @couch=Couch.find(@reservation.couch_id)
-    @reservation.confirmed = true
+    @reservation.estado = "reservado"
     ok = (@couch.is_free?(@reservation.start_date,@reservation.end_date))
     if (ok)
       flash[:success] = "RESERVA CONFIRMADA"

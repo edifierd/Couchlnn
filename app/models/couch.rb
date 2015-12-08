@@ -1,7 +1,8 @@
 class Couch < ActiveRecord::Base
 	belongs_to :user
-	has_many :reservations
-  has_many :comentarios
+	has_many :reservations, dependent: :destroy
+  has_many :comentarios, dependent: :destroy
+  has_many :couch_calification, dependent: :destroy
 	has_one :CouchType
 	validates_presence_of :titulo, :capacity, :descripcion
 

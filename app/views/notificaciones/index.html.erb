@@ -81,10 +81,38 @@
   <div class="row">
     <div class="col-md-12"><h4>Calificar Usuario</h4></div>
   </div>
-
   <div class="row" style="background-color:#F2F2F2">
     <div class="col-md-12">
-      
+    <table class="table">
+      <tr>
+        <th>Nombre Usuario</th>
+        <th>Couch en el que se hospedo</th>
+        <th>Opcion</th>
+      </tr>
+      <% Reservation.where("estado = 'finalizado' ").each do |res|
+        if (Couch.find(res.couch_id).user.id == current_user.id) and (!res.user_calification)
+      %>
+      <tr>
+        <td>
+        <%= link_to res.user do %>
+          <%= res.user.first_name %><%= "  " %><%= res.user.last_name %>
+        <% end %>
+        </td>
+        <td>
+        <%= link_to Couch.find(res.couch_id).titulo , Couch.find(res.couch_id) %>
+        </td>
+        <td>
+        <%= form_for  UserCalification.new , url: {:action=>"new", :controller=>"user_calification" }  do |e| %>
+          <%= hidden_field_tag "user_id_propietario", Couch.find(res.couch_id).user.id %>
+          <%= hidden_field_tag "user_id", res.user.id %>
+          <%= hidden_field_tag "reservation_id", res.id %>
+          <%= e.submit "Calificar", class: 'btn btn-primary' %>
+        <% end %>
+        </td>
+      </tr>
+      <% end
+      end %>
+    </table>
     </div>
   </div>
 </div>
@@ -108,10 +136,47 @@
 
   <div class="row" style="background-color:#F2F2F2">
     <div class="col-md-12">
-      
+      <table class="table">
+      <tr>
+        <th>Couch</th>
+        <th>Propietario</th>
+        <th>Opcion</th>
+      </tr>
+      <% Reservation.where("estado = 'finalizado' ").each do |res|
+        if (res.user_id == current_user.id) and (!res.couch_calification)
+      %>
+      <tr>
+        <td>
+        <%= link_to Couch.find(res.couch_id) do %>
+          <%= Couch.find(res.couch_id).titulo %>
+        <% end %>
+        </td>
+        <td>
+        <%= link_to Couch.find(res.couch_id).user.first_name ,  Couch.find(res.couch_id).user %>
+        </td>
+        <td>
+         <%= form_for  CouchCalification.new , url: {:action=>"new", :controller=>"couch_calification" }  do |e| %>
+          <%= hidden_field_tag "couch_id", res.couch_id %>
+          <%= hidden_field_tag "user_id", res.user.id %>
+          <%= hidden_field_tag "reservation_id", res.id %>
+          <%= e.submit "Calificar", class: 'btn btn-primary' %>
+        <% end %>
+        </td>
+      </tr>
+      <% end
+      end %>
+    </table>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
 
 
 <!-- NOTIFICACION NUEVA PREGUNTA -->

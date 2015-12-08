@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'user/index'
   get 'ser_premium/index'
   post 'ser_premium/new'
+  get 'ser_premium/ganancias'
+  post 'ser_premium/buscar'
   get 'password_reset/index'
   post 'password_reset/new'
   get 'reservation/new'
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
   get 'comentario/new'
   get 'comentario/edit'
   post 'reservation/buscar'
+
   resources :couchs
   resources :couch_type
   resources :users

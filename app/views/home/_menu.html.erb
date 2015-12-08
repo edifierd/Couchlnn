@@ -1,10 +1,17 @@
+<style type="text/css">
+	.boton_menu{
+		margin: 10px;
+	}
+</style>
+
 <%= link_to "/" do %>
 	<%= image_tag "titulo.jpg" , style:"width: 100%" %>
 <% end %>
 
 <div class="row" >
+	<div class="col-md-12" style="heigth:30px; display: block" >
 
-	<div class="col-md-2"><br>
+	<div class="boton_menu" style="float:left">
 		<% if current_user %> 
 			<%= button_to 'Cerrar Sesión', destroy_user_session_path, method: :delete ,  class: 'btn btn-info btn-sm' %> 
 		<% else %>
@@ -12,7 +19,7 @@
 		<% end %>
 	</div>
 
-	<div class="col-md-2"><br>
+	<div class="boton_menu" style="float:left">
 		<% if current_user and can? :read, User %>
 		<%= link_to current_user.first_name , current_user,  class: 'btn btn-info btn-sm' %>
  		<%= link_to "/notificaciones/index" ,  class: 'btn btn-info btn-sm' do  %>
@@ -22,28 +29,60 @@
 		<% end %>
 	</div>
 
-	<div class="col-md-2"><br>
+	<div class="boton_menu" style="float:left">
 		<%= link_to 'Buscar Couchs', "/",  class: 'btn btn-info btn-sm' %>
 	</div>
 
-	<div class="col-md-2"><br>
+	<div class="boton_menu" style="float:left">
 		<% if current_user and can? :crud, User %>
 			<%= link_to 'Lista de Usuarios', users_path ,  class: 'btn btn-info btn-sm' %> 		
 		<% end %>
 	</div>
 
-	<div class="col-md-2"><br>
+	<div class="boton_menu" style="float:left" >
 		<% if current_user and can? :crud, CouchType %>
 			<%= link_to 'Tipos de couch', "/couch_type",  class: 'btn btn-info btn-sm'  %>  
 		<% end %>
 	</div>
 
-	<div class="col-md-2"><br>
+
+	<div class="boton_menu" style="float:left">
 		<% if current_user and can? :crud, CouchType %>
 			<%= link_to 'Buscar reservas aceptadas', "/reservation",  class: 'btn btn-info btn-sm'  %>  
+		<% end %>		
+	</div>
+
+	<div class="boton_menu" style="float:left">
+		<% if current_user and can? :crud, CouchType %>
+			<%= link_to 'Ganancias', "/ser_premium/ganancias",  class: 'btn btn-info btn-sm'  %>  
 		<% end %>
 	</div>
 
+	</div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <br><br>

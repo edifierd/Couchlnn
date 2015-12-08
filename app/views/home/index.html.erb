@@ -2,13 +2,15 @@
 		
 <table class="table">
 	<tr>
-		<td colspan="4" ><h3>Buscar un couch</h3></td>
+		<td colspan="6" ><h3>Buscar un couch</h3></td>
 	</tr>
 	<tr>
 		<th>Lugar</th>
 		<th>Tipo</th>
 		<th>Capacidad</th>
-		<th>Buscar</th>
+    <th>Fecha de inicio de disponibilidad</th>
+    <th>Fecha de Fin de disponibilidad</th>
+    <th>Buscar</th>
 	</tr>
 	
       
@@ -51,17 +53,14 @@
 	  <td>
 		<input id="capacity" max="20.0" min="1.0" name="capacity" step="1" type="number" value=1 required/>
 	  </td>
-
-      <td class="col-md-6">
-        <%= f.label "Fecha de inicio de disponibilidad" %>
-          <%= f.date_select :avivable_in_date, :order => [:day, :month, :year], :required => true %>
-        </td>
-        <td class="col-md-6">
-        <%= f.label "Fecha de Fin de disponibilidad" %>
-          <%= f.date_select :avivable_out_date, :order => [:day, :month, :year] , :required => true %>
-        </td>
+    <td class="col-md-6">
+        <%= f.date_select :avivable_in_date, :order => [:day, :month, :year], :required => true %>
+    </td>
+    <td class="col-md-6">
+        <%= f.date_select :avivable_out_date, :order => [:day, :month, :year] , :required => true %>
+    </td>
 	  <td>
-	  	<button type="submit" title="Buscar">
+	  	<button type="submit" title="Buscar" style="background:none; border:none">
 	  		<img src="/assets/search.png" alt="Buscar" />
 		  </button>
 	  </td>

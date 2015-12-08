@@ -1,14 +1,5 @@
 class SerPremiumController < ApplicationController
 
-  def index
-  end
-
-  def show
-  end
-
-  def edit    
-  end
-
   def new
   	if params[:nombre] != '' and  params[:secret]  != '' and  params[:num] != ''
 		  @nombre = params[:nombre]
@@ -23,12 +14,25 @@ class SerPremiumController < ApplicationController
   	end
   end
 
-  def create
+
+  def ganancias
 
   end
 
-  def destroy
+  def buscar
 
+  @users = []
+  in_date = Date.civil(                   params[:reservation]["start_date(1i)"].to_i,
+                                          params[:reservation]["start_date(2i)"].to_i,
+                                          params[:reservation]["start_date(3i)"].to_i)
+
+  out_date = Date.civil(                  params[:reservation]["end_date(1i)"].to_i,
+                                          params[:reservation]["end_date(2i)"].to_i,
+                                          params[:reservation]["end_date(3i)"].to_i)
+
+  User.all.each do |user|
+      @users << user if ((user.has_role?  :premium) && user.fechaPago >= in_date && user.fechaPago <= out_date )   
   end
-
+  
+  end
 end

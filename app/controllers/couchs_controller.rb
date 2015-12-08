@@ -22,8 +22,20 @@ class CouchsController < ApplicationController
       end
       q+= "couch_type_id = " + params[:couch][:couch_type_id] + " "
     end
+    avivable_in_date = Date.civil( params[:couch]["avivable_in_date(1i)"].to_i,
+                                          params[:couch]["avivable_in_date(2i)"].to_i,
+                                          params[:couch]["avivable_in_date(3i)"].to_i)
 
-    @couchs = Couch.where( q  )
+   avivable_out_date = Date.civil( params[:couch]["avivable_out_date(1i)"].to_i,
+                                          params[:couch]["avivable_out_date(2i)"].to_i,
+                                          params[:couch]["avivable_out_date(3i)"].to_i)
+   
+    q+= " AND '" + avivable_in_date.strftime("%d/%m/%Y") + "' >= avivable_in_date AND '"
+    q+= avivable_out_date.strftime("%d/%m/%Y") + "' <= avivable_out_date "
+
+
+
+    @couchs = Couch.where( q )
   end
 
   def show
@@ -43,12 +55,11 @@ class CouchsController < ApplicationController
     @couch.couch_type_id = params[:couch][:couch_type_id]
     @couch.enable = true
     @couch.url_foto = params[:couch][:url_foto]
-    @couch.avivable_in_date = params[:couch][:avivable_in_date]
+
     @couch.avivable_in_date = Date.civil( params[:couch]["avivable_in_date(1i)"].to_i,
                                           params[:couch]["avivable_in_date(2i)"].to_i,
                                           params[:couch]["avivable_in_date(3i)"].to_i)
 
-    @couch.avivable_out_date = params[:couch][:avivable_out_date]
     @couch.avivable_out_date = Date.civil( params[:couch]["avivable_out_date(1i)"].to_i,
                                           params[:couch]["avivable_out_date(2i)"].to_i,
                                           params[:couch]["avivable_out_date(3i)"].to_i)

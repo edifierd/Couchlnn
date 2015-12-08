@@ -42,6 +42,12 @@
 		<% end %>
 	</div>
 
+	<div class="col-md-2"><br>
+		<% if current_user and can? :crud, CouchType %>
+			<%= link_to 'Buscar reservas aceptadas', "/reservation",  class: 'btn btn-info btn-sm'  %>  
+		<% end %>
+	</div>
+
 </div>
 
 <br><br>

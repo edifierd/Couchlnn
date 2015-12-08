@@ -89,7 +89,8 @@
       <td>
       <%= f.text_area :descripcion, class: 'form-control', label: 'descripcion', placeholder: 'Ingrese la descripción' , :required => true %>
         </td>
-    </tr>      
+    </tr> 
+    <tr>     
       <td class="col-md-6">
         <%= f.label "Fecha de inicio de disponibilidad" %>
           <%= f.date_select :avivable_in_date, :order => [:day, :month, :year], :required => true %>

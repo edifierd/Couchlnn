@@ -11,7 +11,8 @@
 		<th>Buscar</th>
 	</tr>
 	
-	<form action= "/couchs">
+      
+      <%= form_for Couch.new , url: {:action=>"index", :controller=>"couchs"} do |f| %>
 
 	<tr>
 		<td>
@@ -50,6 +51,15 @@
 	  <td>
 		<input id="capacity" max="20.0" min="1.0" name="capacity" step="1" type="number" value=1 required/>
 	  </td>
+
+      <td class="col-md-6">
+        <%= f.label "Fecha de inicio de disponibilidad" %>
+          <%= f.date_select :avivable_in_date, :order => [:day, :month, :year], :required => true %>
+        </td>
+        <td class="col-md-6">
+        <%= f.label "Fecha de Fin de disponibilidad" %>
+          <%= f.date_select :avivable_out_date, :order => [:day, :month, :year] , :required => true %>
+        </td>
 	  <td>
 	  	<button type="submit" title="Buscar">
 	  		<img src="/assets/search.png" alt="Buscar" />
@@ -57,7 +67,7 @@
 	  </td>
     </tr>
 
-	</form>
+	<% end %>
 	
 </table>
 

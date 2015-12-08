@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'acerca_de/index'
   get 'user_calification/index'
   get 'couchs/index'
+  post 'couchs/index'
   get 'couch_type/index'
   get 'user/index'
   get 'ser_premium/index'
@@ -15,10 +16,15 @@ Rails.application.routes.draw do
   post 'password_reset/new'
   get 'reservation/new'
   get 'reservation/index'
+  post 'reservation/show'
+  get 'comentario/new'
+  get 'comentario/edit'
+
   resources :couchs
   resources :couch_type
   resources :users
   resources :reservation
+  resources :comentario
   root 'home#index'
 
   

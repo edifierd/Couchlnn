@@ -140,7 +140,7 @@
    </tr>
    <%  
    Reservation.all.each do |res|  
-       if (Couch.find(res.couch_id).user.id == current_user.id) and (!res.is_pendiente?) (res.couch_id == @couch.id)
+       if (Couch.find(res.couch_id).user.id == current_user.id) and (res.couch_id == @couch.id)
    %>
        <tr>
           <td>
@@ -155,49 +155,85 @@
           <td>
         <%= link_to Couch.find(res.couch_id).titulo, Couch.find(res.couch_id) %>
           </td>
-          <td>
-        <%= link_to "Aceptar",  edit_reservation_path(res) , class: 'btn btn-success btn-sm' %>
-          </td>
-          <td>
-        <%= link_to "Rechazar", res, method: :delete, class: 'btn btn-danger btn-sm' %>
-          </td>
-       </tr> 
+          <% if res.is_pendiente? %> 
+          	<td>
+        		<%= link_to "Aceptar",  edit_reservation_path(res) , class: 'btn btn-success btn-sm' %>
+          	</td>
+         	<td>
+        	<%= link_to "Rechazar", res, method: :delete, class: 'btn btn-danger btn-sm' %>
+         	</td>
+         <% else %>
+            <td><%= res.estado %></td>
+            <td></td>
+         <% end %>
    <% end end %>
 </table>
 		</div>
 	</div>
 </div>
+<% end %>
 
+<div class="col-xs-12">
+  <h2>¿Preguntas?</h2>
+   	<%  @couch.comentarios.each do |com|  %>
+   	<br>
+   	<div class="col-xs-12" style="background-color: #F0F0F0;box-shadow: 2px 2px 2px #888888;border-radius: 4px;margin-bottom: 24px;padding: 16px;">
+   		<h4>
+   			<%= User.find(com.user_id).first_name %>
+   		</h4>
+   		<%= com.body %>
+   		<br>
+   		<% if (com.respondido) %>
+   		<div style="padding-top: 18px;padding-left: 50px;">
+   			<%= com.respuesta %>
+   		</div>
+   			
+   		<% else %>
+   		<% if current_user and can? :update, @couch %>
+   		<form action="/comentario/edit" method="get">
+         	<input type="text" name="id" hidden required value= <%= com.id %> >
+   		<tr>
+      		<td>
+      			<textarea name="respuesta" rows="4"  class="form-control" placeholder="Ingrese la respuesta"></textarea>
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>
+      			<button type="submit" class="btn btn-success">Responder</button>
+      		</td>
+      	</tr>
+      	</form>
+		<% end %>
+		<% end %>
 
-<div class="container">
-  <h2>Comentarios</h2>
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Añadir comentario</button>
+   	</div>
+   	<% end %>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Nuevo comentario</h4>
-        </div>
-        <div class="modal-body">
-          <p>Ingrese un comentario aquí</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+    <div>
+      <form action="/comentario/new" method="get"> 
+      	<input type="text" name="user_id" hidden required value= <%= current_user.id %> >
+      	<input type="text" name="couch_id" hidden required value= <%= @couch.id %> >
+      	<tr>
+      		<td>
+      			<textarea name="body" rows="4"  class="form-control" placeholder="Ingrese la pregunta"></textarea>
+      		</td>
+      	</tr>
+      	<br>
+      	<tr>
+      		<td>
+      			<button type="submit" class="btn btn-info">Postear</button>
+      		</td>
+      	</tr>
+      </form>
+    </div>
+        
       </div>
       
     </div>
   </div>
-  
 </div>
 
-<% end %>
+
 
 
 

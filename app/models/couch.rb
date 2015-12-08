@@ -15,14 +15,14 @@ class Couch < ActiveRecord::Base
   end
 
   def is_free?(from, to)
-    	reservas_del_couch = self.reservations # reservas del couch (por el has_many)
-    	reservas_confirmadas = reservas_del_couch.confirmed # solo miramos las confirmadas
-    	reservas_confirmadas.where('? < end_date', from) # from se copiaría en el lugar de '?'
-    	reservas_confirmadas.where('? > start_date', to) # to se copiaría en el lugar de '?'
+    	reservas_del_couch = self.reservations # reservas del couch (por el has_many)                                            S
+    	reservas_confirmadas = reservas_del_couch.where( "estado = 'reservado'") # solo miramos las reservas confirmadas            
+    	reservas_confirmadas = reservas_confirmadas.where('? < end_date', from) # from se copiaría en el lugar de '?'
+    	reservas_confirmadas = reservas_confirmadas.where('? > start_date', to) # to se copiaría en el lugar de '?'
     
     # Retorno true o false si el resultado de lo anterior 
     # está vacío o no
-    	return reservas_confirmadas.empty?
+    	return (reservas_confirmadas.empty? && from >= self.avivable_in_date && to <= self.avivable_out_date)
   end
 
   def self.free_couches(from, to)

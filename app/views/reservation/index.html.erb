@@ -7,7 +7,34 @@
   margin-left: 15px;
   } 
 </style>
+
+<div class="row" style="
+  padding: 50px; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #D8D8D8; 
+  margin-right:30px; 
+  margin-left:30px;
+  margin-top: 15px;
+  margin-bottom:22px;"
+>
   
+  <%= form_for Reservation.new , url: {action:"show"} do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.label "Fecha de inicio" %>
+          <%= f.date_select :start_date, :order => [:day, :month, :year] %>
+        </div>
+        <div class="col-md-6">
+        <%= f.label "Fecha de Fin" %>
+          <%= f.date_select :end_date, :order => [:day, :month, :year] %>
+        </div>
+      </div>
+      <%= f.submit "Buscar", class: 'btn btn-primary' %>
+    </div>
+<% end %>
+
+</div>
 
 <div class="row" style="
   padding: 50px; 
@@ -18,7 +45,10 @@
   margin-left:30px;
   margin-top: 15px;
   margin-bottom:100px;"
->     
+>   
+
+  
+
   <div class="row">
     <div class="col-md-12"><h2>Solicitudes pendientes de reserva</h2></div>
   </div>
@@ -34,9 +64,11 @@
        <td></td>
        <td></td>
    </tr>
+
+   
+
    <%  
    Reservation.all.each do |res|  
-       if (Couch.find(res.couch_id).user.id == current_user.id) and !(res.confirmed) 
    %>
        <tr>
           <td>
@@ -58,7 +90,7 @@
         <%= link_to "Rechazar", res, method: :delete, class: 'btn btn-danger btn-sm' %>
           </td>
        </tr> 
-   <% end end %>
+   <% end %>
 </table>
     </div>
   </div>

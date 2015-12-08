@@ -217,7 +217,20 @@
 
 	<div class="row" style="background-color:#F2F2F2">
 		<div class="col-md-12">
-			
+	    <table class="table">
+		  <tr>
+			<th>Puntaje</th>
+			<th>Fecha</th>
+			<th>Couch</th>
+		  </tr>
+		  <% CouchCalification.where("user_id ="+@user.id.to_s).each do |c| %>
+		  <tr>
+		    <td><%= c.puntaje %></td>
+		    <td><%= c.fecha %></td>
+		    <td><%=link_to Couch.find(c.couch_id).titulo, Couch.find(c.couch_id) %></td>
+		  </tr>
+		  <% end %>	
+		</table>
 		</div>
 	</div>
 </div>

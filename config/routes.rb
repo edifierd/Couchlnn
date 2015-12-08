@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'couch_calification/new'
+
   get 'notificaciones/index'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   get 'acerca_de/index'
-  get 'user_calification/index'
   post 'user_calification/new'
-  get 'user_calification/show'
+  post 'couch_calification/new'
   get 'couchs/index'
   get 'couch_type/index'
   get 'user/index'
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   resources :users
   resources :reservation
   resources :user_calification
+  resources :couch_calification
   root 'home#index'
 
   

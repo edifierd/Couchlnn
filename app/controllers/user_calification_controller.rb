@@ -1,8 +1,5 @@
 class UserCalificationController < ApplicationController
-	def index
-		
-	end
-
+	
 	def new
 		@user_calification = UserCalification.new
 		@user_id = params[:user_id]
@@ -31,7 +28,4 @@ class UserCalificationController < ApplicationController
 		redirect_to "/notificaciones/index"
 	end
 
-	def show
-       @user_calification = params[:id]		
-	end
 end

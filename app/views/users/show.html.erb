@@ -3,7 +3,8 @@
 <script type="text/javascript">
 	function muestra_oculta(contenido){
 		document.getElementById("calificaciones").style.display = "none";
-		document.getElementById("calificacionesDadas").style.display = "none";
+		document.getElementById("usuariosCalificados").style.display = "none";
+		document.getElementById("couchsCalificados").style.display = "none";
 		document.getElementById("couchs").style.display = "none";
 		document.getElementById("couchVisitados").style.display = "none";
 		<% if current_user.id == @user.id %>
@@ -100,7 +101,10 @@
 	  		</a>
 	  	</div>
 	  	<div class="col-md-2" align="center" >
-	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('calificacionesDadas')" >Calificaciones Dadas</a>
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('usuariosCalificados')" >Usuarios Calificados</a>
+	  	</div>
+	  	<div class="col-md-2" align="center" >
+	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('couchsCalificados')" >Couchs Calificados</a>
 	  	</div>
 	  	<div class="col-md-2" align="center" >
 	  		<a class="btn btn-warning btn-sm" onclick="muestra_oculta('couchs')">
@@ -114,7 +118,6 @@
 	  		<a class="btn btn-warning btn-sm"  onclick="muestra_oculta('reservas')" >Mis Reservas</a>
 	  		<% end %>
 	  	</div>
-	  	<div class="col-md-2" align="center" ></div>
 	</div>
 </div>
 
@@ -161,7 +164,7 @@
 
 <!-- CALIFICACIONES DADAS A OTROS USUARIOS -->
 
-<div id="calificacionesDadas" class="row" style="
+<div id="usuariosCalificados" class="row" style="
 	padding: 50px; 
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -173,7 +176,43 @@
 	display:none;"
 >     
 	<div class="row">
-		<div class="col-md-12"><h2>Calificaciones Dadas</h2></div>
+		<div class="col-md-12"><h2>Usuarios Calificados</h2></div>
+	</div>
+
+	<div class="row" style="background-color:#F2F2F2">
+		<div class="col-md-12">
+		<table class="table">
+		  <tr>
+			<th>Puntaje</th>
+			<th>Usuario</th>
+		  </tr>
+		  <% UserCalification.where("user_id_propietario ="+@user.id.to_s).each do |c| %>
+		  <tr>
+		    <td><%= c.puntaje %></td>
+		    <td><%=link_to c.user.first_name, c.user %></td>
+		  </tr>
+		  <% end %>	
+		</table>
+			
+		</div>
+	</div>
+</div>
+
+<!-- CALIFICACIONES DADAS A COUCHS -->
+
+<div id="couchsCalificados" class="row" style="
+	padding: 50px; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #D8D8D8; 
+	margin-right:30px; 
+	margin-left:30px;
+	margin-top: 15px;
+	margin-bottom:20px;
+	display:none;"
+>     
+	<div class="row">
+		<div class="col-md-12"><h2>Couchs Calificados</h2></div>
 	</div>
 
 	<div class="row" style="background-color:#F2F2F2">
@@ -182,6 +221,7 @@
 		</div>
 	</div>
 </div>
+
 
 <!-- COUCHS QUE VISITO EL USUARIO -->
 

@@ -11,12 +11,17 @@ class UserCalificationController < ApplicationController
 	end
 
 	def create
-		@user_calification = UserCalification.new
-		@user_calification.user_id = params[:user_id]
-		@user_calification.user_id_propietario = params[:user_id_propietario]
+		@user_califications = UserCalification.where("user_id = "+params[:user_id])
+		@user_calification = @user_califications.where("user_id_propietario ="+params[:user_id_propietario])
+		if ( @user_calification.count == 0 ) 
+			@user_calification = UserCalification.new
+			@user_calification.user_id = params[:user_id]
+			@user_calification.user_id_propietario = params[:user_id_propietario]
+		else
+			@user_calification = @user_calification.first
+		end
 		@user_calification.fecha = Date.today
 		@user_calification.puntaje = params[:puntaje]
-		@user_calification.comentario = params[:comentario]
 		@user_calification.save 
 
 		reserva = Reservation.find(params[:reservation_id])

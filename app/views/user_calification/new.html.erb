@@ -1,12 +1,10 @@
 <%= render "home/menu" %>
 
 
-
 <%= form_for @user_calification , url: {action:"create"} do |f| %>
 	<table class="table">
 		<tr>
 			<th>Puntaje</th>
-			<th>Comentario</th>
 			<td></td>
 		</tr>
 		<tr>
@@ -14,14 +12,10 @@
 			<select name="puntaje">
           		<option value="1">1</option>
           		<option value="2">2</option>
-
           		<option value="3">3</option>
           		<option value="4">4</option>
           		<option value="5">5</option>
           	</select>
-			</td>
-			<td>
-			<%= f.text_field :comentario, placeholder: 'Ingrese un comentario' , :required => true , size: 50 %>
 			</td>
 			<td>
 			<%= hidden_field_tag "user_id_propietario", @user_id_propietario %>

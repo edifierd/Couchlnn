@@ -20,4 +20,19 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :secret_question, :age
   validates_inclusion_of :age, in: 18..99
 
+  def calificacionPromedio
+    total = 0
+    cant_calificaciones = self.user_califications.count
+    if cant_calificaciones > 0 
+      self.user_califications.each do |c|
+        total = total + c.puntaje
+      end
+      rta = (total / cant_calificaciones)
+    else
+      rta = total 
+    end
+    return rta
+  end
+
+
 end

@@ -35,7 +35,7 @@ class CouchsController < ApplicationController
 
 
 
-    @couchs = Couch.where( q )
+    @couchs = Couch.where( q  )
   end
 
   def show
